@@ -1,5 +1,6 @@
 const myProject=function(title){
     let projectTitle=title;
+    let projectId=crypto.randomUUID();
     let project=[];//contsains all tasks here
     function getProject(){
         return project;
@@ -7,8 +8,8 @@ const myProject=function(title){
     function addTask(task){
         project.push(task);
     }
-    function deleteTask(task){
-        project=project.filter((existingTask)=>{existingTask.id!==task.id})
+    function deleteTask(taskId){
+        project=project.filter((existingTask)=>{return existingTask.id!==taskId})
     }
     return {addTask,deleteTask,getProject}
 }
