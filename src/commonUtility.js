@@ -3,7 +3,11 @@ const crudFunctionality=(function(){
         parentArray.push(child)
     }
     function readItem(){}
-    function updateItem(){}
+    function updateItem(child,newData){
+        Object.assign(child,newData);
+        console.log(newData,child);
+        console.log(`${child.type} ${newData.title} has been updated`);
+    }
     function deleteItem(parentArray,child){
           for(let i=0;i<parentArray.length;i++)
           {

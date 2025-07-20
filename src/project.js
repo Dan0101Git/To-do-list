@@ -19,7 +19,10 @@ const myProject=function(data){
     function deleteChild(task){
         crudFunctionality.deleteItem(nestedArray,task)
     }
-    return {addChild,deleteChild,getProject,nestedArray}
+    function updateChild(child,newData){
+        crudFunctionality.updateItem(child,newData);
+    }
+    return {addChild,deleteChild,getProject,nestedArray,updateChild}
 }
 
 export default myProject;

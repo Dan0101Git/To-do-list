@@ -7,6 +7,9 @@ const Library=(function(){
        crudFunctionality.createItem(nestedArray,project);
        return project
     }
+        function updateChild(child,newData){
+        crudFunctionality.updateItem(child,newData);
+    }
     function deleteChild(project){
         crudFunctionality.deleteItem(nestedArray,project);
     }
@@ -14,7 +17,7 @@ const Library=(function(){
     function getlibrary(){
         return {nestedArray};
     }
-    return {addChild,getlibrary,deleteChild}
+    return {addChild,getlibrary,deleteChild,updateChild}
 })();
 const stateObject={
 myLibrary:Library.getlibrary(),

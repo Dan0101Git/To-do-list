@@ -18,6 +18,9 @@ class Task{
        crudFunctionality.createItem(this.nestedArray,subTask);
        return subTask
     }
+        updateChild(child,newData){
+        crudFunctionality.updateItem(child,newData);
+    }
         deleteChild(subTask){
         crudFunctionality.deleteItem(this.nestedArray,subTask)
     }
