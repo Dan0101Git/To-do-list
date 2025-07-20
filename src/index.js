@@ -1,18 +1,28 @@
 import "./styles.css";
-import Task from "./tasks";
-import myProject from "./project";
+import { Library } from "./projectState";
+import data from "./data";
+import stateObject from "./projectState";
+import helper from "./helpers";
 console.log("css imported");
 
 
-const defaultProject=new myProject("default");
-defaultProject.addTask(new Task("complete todo","","today","high"));
-defaultProject.addTask(new Task("complete gertodo","","today","high"));
-defaultProject.addTask(new Task("completegrge todo","","today","high"));
-defaultProject.getProject()[0].createSubTasks("complete js first");
-defaultProject.getProject()[0].createSubTasks("start adding dom");
-defaultProject.getProject()[0].createSubTasks("start making ui");
+const firstProject=Library.addChild("Testing");//adding project
+const defaultProject=Library.addChild("Default");
 
 
-defaultProject.getProject()[0].taskArray[0].toggleCompletion();
-console.log(defaultProject.getProject()[0].taskArray);
-console.log(defaultProject.getProject());
+
+const task1=firstProject.addChild(data("complete todo","","today","high"));//adding tasks
+const task2=defaultProject.addChild(data("complete danishtodo","","today","high"));
+const task3=defaultProject.addChild(data("complete gertodo","","today","high"));
+
+const subTask1=task1.addChild(data("complete js first"));
+const subTask2=task2.addChild(data("start adding dom"));
+const subTask3=task3.addChild(data("start making ui"));
+const subTask4=task3.addChild(data("write down dom"));
+const subTask5=task3.addChild(data("check for bugs"));
+
+const itemDelete=helper.detectItem(subTask2.id);
+console.log(itemDelete);
+itemDelete.parent.deleteChild(itemDelete.child)
+
+console.log(stateObject.myLibrary.nestedArray);

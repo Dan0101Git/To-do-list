@@ -1,17 +1,25 @@
-const myProject=function(title){
-    let projectTitle=title;
-    let projectId=crypto.randomUUID();
-    let project=[];//contsains all tasks here
+//each parent controls crud functionality of the child
+
+import crudFunctionality from "./commonUtility";
+import Task from "./tasks";
+const myProject=function(data){
+    let projectTitle=data.title;
+    let id=crypto.randomUUID();
+    let type="project";
+    let nestedArray=[];//contsains all tasks here
+   
     function getProject(){
-        return project;
+        return {nestedArray,projectTitle,id,type}
     }
-    function addTask(task){
-        project.push(task);
+    function addChild(data){
+       const task=new Task(data)
+       crudFunctionality.createItem(nestedArray,task);
+       return task;
     }
-    function deleteTask(taskId){
-        project=project.filter((existingTask)=>{return existingTask.id!==taskId})
+    function deleteChild(task){
+        crudFunctionality.deleteItem(nestedArray,task)
     }
-    return {addTask,deleteTask,getProject}
+    return {addChild,deleteChild,getProject,nestedArray}
 }
 
 export default myProject;

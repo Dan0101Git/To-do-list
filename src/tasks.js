@@ -1,29 +1,30 @@
+import crudFunctionality from "./commonUtility";
 class Task{
-    constructor(title,description,dueTime,priority){
-        this.title=title;
-        this.description=description;
-        this.dueTime=dueTime;
-        this.priority=priority;
+    constructor(data){
+        this.title=data.title;
+        this.description=data.description;
+        this.dueTime=data.dueTime;
+        this.priority=data.priority;
         this.taskCompletion=false;
         this.id=crypto.randomUUID();
-        this.taskArray=[];
+        this.nestedArray=[];
+        this.type="task"
     }
-    createSubTasks(title){
-       function  SubTasks(title){
-                this.title=title;
-                this.taskCompletion=false;
-        };
-        const subTask= Object.assign({},new SubTasks(title),{toggleCompletion:this.toggleCompletion});
-      this.taskArray.push(subTask);
-      return subTask;
-    }
-    deleteSubTasks(){
 
+
+    
+         addChild(data){
+         const subTask= new SubTask(data);
+       crudFunctionality.createItem(this.nestedArray,subTask);
+       return subTask
+    }
+        deleteChild(subTask){
+        crudFunctionality.deleteItem(this.nestedArray,subTask)
     }
     toggleCompletion(){
         if(!this.taskCompletion ){
             this.taskCompletion=true;
-            if( this instanceof Task)
+
             this.SubTasksCompletion();
         }
         else
@@ -31,15 +32,20 @@ class Task{
 
     }
     SubTasksCompletion(){
-        this.taskArray.forEach((subtask)=>{
+        this.nestedArray.forEach((subtask)=>{
             subtask.taskCompletion=true;
         })
     }
-    get thisTaskArray(){
-        return this.taskArray;
-    }
 
 }
-
+       function  SubTask(data){
+                this.title=data.title;
+                this.taskCompletion=false;
+                this.id=crypto.randomUUID();
+                this.type="subtask";
+                this.toggleCompletion=function(){
+                     this.taskCompletion=!this.taskCompletion;
+                }
+        };
 
 export default Task;
