@@ -3,7 +3,7 @@ import myProject from "./project";
 const Library=(function(){
     let nestedArray=[];
    function addChild(data){
-    const project=myProject(data)
+    const project=new myProject(data)
        crudFunctionality.createItem(nestedArray,project);
        return project
     }

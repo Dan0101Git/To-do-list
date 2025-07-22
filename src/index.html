@@ -4,8 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do-List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+    <div class="container">
+        <header>
+            <div><img src="./images/icons/list-icon.png" alt=""></div>
+<h1>To-do's</h1>
+    </header>
+    <main>
+        <div class="navbar">
+            <img src="images/icons/menu.png" class="menu-image" alt="">
+            <button class="create-project"><span>+</span>CREATE</button>
+            <div class="projectList">
+                <ul><li>My Tasks</li></ul>
+            </div>
+            <dialog class="add-project">
+                <form class="project-form" action="">
+                <div>
+                    <label for="project-title">Create New Project</label><input id="project-title" type="text" placeholder="title">
+                </div>
+                <div class="buttons">
+                    <button>CANCEL</button>
+                        <button type="submit" class="submit-project">ADD</button>
+
+                </div>
+            </form></dialog>
+                <dialog class="add-task">
+                <form class="task-form" action="">
+                <div>
+                    <label for="task-title">Add Task</label><input id="task-title" type="text" placeholder="title">
+                </div>
+
+                <div>
+                  <input id="task-date" type="date" >
+                </div><div>
+                  <textarea id="description" placeholder="Description"></textarea>
+ </div>
+           
+                <div class="buttons">
+                   
+                        <button type="submit" class="submit-project">SAVE</button>
+
+                </div>
+            </form></dialog>
+        </div>
+        <section class="article">
+            <div class="projects">
+                 
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>created by <a href="https://github.com/Dan0101Git">Danish</a></p>
+    </footer>
+    </div>
 </body>
 </html>

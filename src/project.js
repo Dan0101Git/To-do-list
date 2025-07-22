@@ -2,27 +2,27 @@
 
 import crudFunctionality from "./commonUtility";
 import Task from "./tasks";
-const myProject=function(data){
-    let projectTitle=data.title;
-    let id=crypto.randomUUID();
-    let type="project";
-    let nestedArray=[];//contsains all tasks here
-   
-    function getProject(){
-        return {nestedArray,projectTitle,id,type}
+class myProject{
+    constructor(data){
+            this.title=data.title;
+     this.id=crypto.randomUUID();
+    this.type="project";
+    this.nestedArray=[];//contsains all tasks here
+
     }
-    function addChild(data){
+
+  addChild(data){
        const task=new Task(data)
-       crudFunctionality.createItem(nestedArray,task);
+       crudFunctionality.createItem(this.nestedArray,task);
        return task;
     }
-    function deleteChild(task){
-        crudFunctionality.deleteItem(nestedArray,task)
+  deleteChild(task){
+        crudFunctionality.deleteItem(this.nestedArray,task)
     }
-    function updateChild(child,newData){
+    updateChild(child,newData){
         crudFunctionality.updateItem(child,newData);
     }
-    return {addChild,deleteChild,getProject,nestedArray,updateChild}
+
 }
 
 export default myProject;

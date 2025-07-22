@@ -11,8 +11,6 @@ class Task{
         this.type="task"
     }
 
-
-    
          addChild(data){
          const subTask= new SubTask(data);
        crudFunctionality.createItem(this.nestedArray,subTask);
@@ -32,14 +30,12 @@ class Task{
         }
         else
         this.taskCompletion=false;
-
     }
     SubTasksCompletion(){
         this.nestedArray.forEach((subtask)=>{
             subtask.taskCompletion=true;
         })
     }
-
 }
        function  SubTask(data){
                 this.title=data.title;
