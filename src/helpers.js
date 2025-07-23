@@ -1,8 +1,9 @@
 import stateObject from "./projectState";
+import { Library } from "./projectState";
 import render from "./render";
 export default (function helper(){
     function detectItem(itemId){
-        return findItem(itemId,stateObject.myLibrary);//returns the o bject/project/task subtask clicked upon
+        return findItem(itemId,Library);//returns the o bject/project/task subtask clicked upon
     }
     function updateState(state){
         stateObject.state=state;

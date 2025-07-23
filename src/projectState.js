@@ -17,7 +17,7 @@ const Library=(function(){
     function getlibrary(){
         return {nestedArray};
     }
-    return {addChild,getlibrary,deleteChild,updateChild}
+    return {addChild,getlibrary,deleteChild,updateChild,nestedArray};
 })();
 const stateObject={
 myLibrary:Library.getlibrary(),

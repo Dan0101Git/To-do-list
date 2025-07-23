@@ -7,7 +7,7 @@ export default(function eventListeners(){
         document.body.addEventListener("click",eventListeningHelpers.buttonCreateProject);
     domElements.submitProjectTitle.addEventListener("submit",eventListeningHelpers.createProject);
     domElements.submitTask.addEventListener("submit",eventListeningHelpers.createProject);
-
+    domElements.cardContainer.addEventListener("click",eventListeningHelpers.createProject);
     })
 
 })();

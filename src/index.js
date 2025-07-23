@@ -16,7 +16,13 @@ const domCalls=(function(){
      helper.updateState("create");
      
     }
-    return {createElement}
+    function deleteElement(element,parentId){
+      const itemInfo=helper.detectItem(parentId);
+      itemInfo.parent.deleteChild(itemInfo.child);
+         console.log(stateObject.myLibrary.nestedArray);
+         helper.updateState("delete");
+    }
+    return {createElement,deleteElement};
 })();
 
 
