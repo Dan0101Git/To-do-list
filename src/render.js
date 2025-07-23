@@ -1,5 +1,8 @@
 import domElements from "./domElements";
 import addTask from "./images/icons/addTask.png"
+import deleteBin from "./images/icons/delete.svg"
+import circleList from "./images/icons/circle.svg"
+import calanderImage from "./images/icons/calender.svg"
 const render=function(LibraryState){
   
     if(LibraryState.state==="create" || LibraryState.state==="delete")
@@ -26,7 +29,7 @@ const renderHelpers=(function(){
         const cardActionMenuHtml=`                 <div class="project-menu">
                     <div data-set="${project.id}" class="project-options"><button class="edit project">
                         Rename Project
-                    </button><button class="delete project">Delete Project</button></div>
+                    </button><button class="delete">Delete Project</button></div>
                  </div>`;
                  kebabMenu.innerHTML+=cardActionMenuHtml;
         taskListButton.classList.add("task-list-button");
@@ -53,7 +56,13 @@ const renderHelpers=(function(){
     
     }
     function addTasks(task,taskDiv){
-            taskDiv.innerHTML+=`<li data-set="${task.id}" class="tasks-lists">${task.title}</li>`;
+            taskDiv.innerHTML+=`<li data-set="${task.id}" class="all-tasks on" id="final-task-read"><div  class="tasks-lists "><div><span class="toggle-completion"><img src="${circleList}"></span><span class="task-title">${task.title}</span></div><div class="task-buttons" ><button data-set="${task.id}" class="delete-task"><img class="delete" src="${deleteBin}"></button></div></div></li>`;
+taskDiv.innerHTML+=`<li data-set="${task.id}" class="all-tasks" id="final-task-edit"><div  class="tasks-lists "><div><span class="toggle-completion"><img src="${circleList}"></span><input class="edit-task-title" value="${task.title}"></div></div><div class="edit-task"><form action="" class="edit-task-form">
+<textarea placeholder="Details" name="Description" id="edit-task-descrip" cols="10" rows="5"></textarea>    
+<div class="inputs"><button id="openDate"><img src="${calanderImage}"></button>
+<input type="date" id="hiddenDate" style="display: none" />
+</div>
+</form></div></li>`;
     }
     function resetProjects(){
          Array.from(domElements.cardContainer.children).forEach((project)=>{project.remove();})

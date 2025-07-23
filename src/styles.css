@@ -8,14 +8,14 @@
     --main-font-family:"Quicksand", sans-serif;
     --container-bg:rgba(66, 66, 66, 0.296);
     --border-radius:1rem;
-
+--base-font-size:clamp(12px,calc(10px + .6vw),5vw);
 }
 html{
     font-size: var(--base-font-size);
 }
 body{
 background-color: var(--body-bg);
---base-font-size:clamp(12px,calc(10px + 1vw),5vw);
+
 font-family: var(--main-font-family);
     width: 100vw;
     height: 100vh;
@@ -106,7 +106,7 @@ form label,form input,form textarea{
 form textarea{
     height:5rem;
 }
-form input,form textarea{
+form input,form textarea,input{
 /* height:1.4rem; */
 font-size: 1rem;
 padding:calc(5px + .2rem);
@@ -205,9 +205,7 @@ section .projects{
 section .project-card{
     min-height: 30vh;
     min-width: 20rem;
-    padding:2rem 2rem;
-    padding-right: 2.5rem;
-    border-radius: 1rem;
+    padding:2rem .5rem;    border-radius: 1rem;
     background-color: rgba(151, 151, 151, 0.139);
     display: flex;
     flex-direction: column;
@@ -234,6 +232,19 @@ background-size: cover;
     background-color: rgba(152, 152, 152, 0.185);
     border-radius: 50%;
 }
+ #final-task-read{
+    display: none;
+}
+#final-task-edit.on{
+    display: flex;
+}
+#final-task-read.on{
+    display: flex;
+}
+#final-task-edit{
+    display: none;
+}
+
 .project-menu{
     position: absolute;
     top:1.8rem;
@@ -279,6 +290,7 @@ background-size: cover;
 .project-card h1{
     margin:0 auto;
     letter-spacing: .3rem;
+    padding:0 2rem;
 }
 
 section .project-card:hover{
@@ -287,40 +299,129 @@ section .project-card:hover{
         background-color: rgba(159, 159, 159, 0.067);
         box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
+.task-list{
+      padding:0 .5rem;
+
+}
+.task-list>*{
+       padding:.3rem 1rem;
+}
 .task-list-button{
     display: flex;
     gap:.2rem;
     align-items: center;
     justify-content: flex-start;
     margin-top: 1rem;
-    margin-bottom: .8rem;
+    margin-bottom: .3rem;
 }
 .task-list-button:hover{
        transform: translate(0,0) scale(1.02);
     transition: all .19s ease-in-out;
+}.all-tasks{
+           border-radius: .5rem;
+        width: 100%;
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        gap:.1rem;
+}
+.edit-task-form{
+    width:80%;
+    gap:.2rem;
+ padding:0;
+ display: flex;
+ flex-direction: row;
+ height:auto;
+ align-items: flex-start;
+}
+.edit-task-show{
+    display: block;
+}
+.edit-task-form .inputs{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex:1;
 }
 
+.tasks-lists input{
+     font-weight: 600;
+   font-size: 1rem;
+background-color:transparent ;
+padding: 0;
+border: none;
+border-radius: 0;
+font-family: var(--main-font-family);
+}
+.tasks-lists input:hover{
+    border-bottom: 2px solid purple;
+    color: black;
+}
+.edit-task-form textarea{
+      border-bottom: 2px solid purple;
+      font-size: .8rem;
+}
 .tasks-lists{
     display: flex;
-    gap:1rem;
+    gap:.3rem;
     align-items: center;
-        margin-bottom: .8rem;
+    display: flex;
         font-weight: 500;
         position: relative;
-        border-radius: .5rem;
-        padding:.5rem 1.42rem;
+        justify-content: space-between;
+        height:2.5rem;
 }
-.tasks-lists::before{
-  content: '○'; 
-  position: absolute;
-left: 0;
-  color: black;
-  font-size: 2rem;
-  transition: color 0.3s;
-  font-weight: 1000;
+.tasks-lists>div{
+    display: flex;
+    align-items: center;
+    gap:.5rem;
 }
-.tasks-lists:hover{
-    background-color: rgba(200, 200, 200, 0.71);
+.tasks-lists .task-title{
+ font-weight: 600;
+   font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+.tasks-lists span.toggle-completion{
+display: flex;
+align-items: center;
+  position: relative;
+}
+.toggle-completion:hover img{
+    visibility: hidden;
+}
+.toggle-completion::before{
+content:url(images/icons/tick.svg);
+position: absolute;
+top:0;
+visibility: hidden;
+}
+.toggle-completion:hover::before{
+    visibility: visible;
+}
+.delete-task{
+    border:none;
+    visibility: hidden;
+    height:2.5rem;
+}
+.edit-task-form button{
+       border:none;
+}
+#edit-task-descrip{
+    height:3rem;
+    width:100%;
+}
+.delete-task:hover,.edit-task-form button:hover{
+   background-color: rgba(152, 152, 152, 0.185);
+    border-radius: 50%;
+}
+
+
+.all-tasks:hover{
+    background-color: rgba(147, 147, 147, 0.214);
+}
+.tasks-lists:hover .delete-task{
+    visibility: visible;
 }
 .addTaskButton{
     font-size: 1.2rem;

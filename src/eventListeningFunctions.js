@@ -1,7 +1,8 @@
 import domElements from "./domElements";
 import { domCalls } from "./index";
 const eventListeningHelpers=(function(){
-    let menuFlag=0;
+    let taskEditFlag=0;
+    let elemntflag;
     function buttonCreateProject(e){
         if(e.target=== domElements.createProjectButt){ 
             domElements.createProjectDialog.classList.add("enter-project");
@@ -9,23 +10,29 @@ const eventListeningHelpers=(function(){
    
     if(e.target.className==="task-list-button")
     {
-        
         domElements.createTaskDialog.classList.add("enter-task");
         domElements.createTaskDialog.setAttribute("data-set",`${e.target.getAttribute("data-set")}`);
        domElements.createTaskDialog.showModal();
-
     }console.log(e.target.className);
-        if(menuFlag===1 &&  document.querySelector(".menu-show"))
-        {
-                    document.querySelector(".menu-show").classList.remove("menu-show");
-                    menuFlag=0;
-                    console.log(menuFlag);
-        }
-    
-    else if(e.target.className==="kebab" ){
-        Array.from(e.target.children)[0].classList.add("menu-show");
-        menuFlag=1;
+
+    if(e.target.className==="kebab" || document.querySelector(".menu-show")){
+        if(document.querySelector(".menu-show"))
+        document.querySelector(".menu-show").classList.toggle("menu-show");
+        else
+         Array.from(e.target.children)[0].classList.toggle("menu-show");
     }
+   if (e.target.classList.contains("tasks-lists")) {
+    console.log(e.target.nextElementSibling);
+
+    e.target.parentNode.classList.toggle("on");
+
+    if (e.target.parentNode.nextElementSibling && e.target.parentNode.getAttribute("data-set")===e.target.parentNode.nextElementSibling.getAttribute("data-set")) {
+        e.target.parentNode.nextElementSibling.classList.toggle("on");
+    } else {
+        e.target.parentNode.previousElementSibling.classList.toggle("on");
+    }
+}
+
     
     }
 
@@ -41,7 +48,7 @@ const eventListeningHelpers=(function(){
         domElements.createTaskDialog.close();
             domCalls.createElement([document.querySelector("#task-title").value,document.querySelector("#task-date").value,document.querySelector("#description").value],"task", domElements.createTaskDialog.getAttribute("data-set"));
         }
-        if(e.target.className==="delete project")
+        if(e.target.className==="delete")
         {
             console.log(e.target.parentNode);
             domCalls.deleteElement("",e.target.parentNode.getAttribute("data-set"));
