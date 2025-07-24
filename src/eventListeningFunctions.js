@@ -22,7 +22,7 @@ const eventListeningHelpers=(function(){
         else
          Array.from(e.target.children)[0].classList.toggle("menu-show");
     }
-   if (e.target.classList.contains("tasks-lists")) {
+   if (e.target.classList.contains("tasks-lists") && !e.target.parentNode.classList.contains("completed-list")) {
     console.log(e.target.nextElementSibling);
 
     e.target.parentNode.classList.toggle("on");
@@ -56,7 +56,7 @@ if(e.target.className==="date-shortcut" && e.target.tagName==="IMG")
         if(e.target.className==="task-form"){
 console.log(document.querySelector("#task-date").value);
         domElements.createTaskDialog.close();
-            domCalls.createElement([document.querySelector("#task-title").value,document.querySelector("#description").value,document.querySelector("#task-date").value,false],"task", domElements.createTaskDialog.getAttribute("data-set"));
+            domCalls.createElement([document.querySelector("#task-title").value,document.querySelector("#description").value,document.querySelector("#task-date").value,false,false],"task", domElements.createTaskDialog.getAttribute("data-set"));
         }
         if(e.target.className==="delete")
         {
@@ -73,6 +73,13 @@ console.log(document.querySelector("#task-date").value);
             domCalls.editElement(domHelper.getelementData(taskId),"star",taskId);
             e.stopPropagation();
         }
+        if(e.target.className==="toggle-completion"){
+                        console.log(e.target.parentNode);
+            const taskId=e.target.parentNode.getAttribute("data-set");
+            const elementList=document.querySelector(`li[data-set="${taskId}"]`);
+            elementList.setAttribute("completed",!(elementList.getAttribute("completed")==="true"));
+               domCalls.editElement(domHelper.getelementData(taskId),"circle",taskId);
+        }
 
         if(e.key==="Enter" || e.target.getAttribute("type")==="date" || e.target.className==="date-shortcut"){
             if(e.target.getAttribute("type")==="date")
@@ -81,7 +88,7 @@ console.log(document.querySelector("#task-date").value);
 {
     console.log(document.querySelector("#final-task-edit"));
     const taskId=e.target.parentNode.getAttribute("data-set");
-   domCalls.editElement([document.querySelector(".on input").value,document.querySelector(".on textarea").value,document.querySelector(".on input[type='date']").value || e.target.getAttribute("value"),""],"edit",taskId)
+   domCalls.editElement([document.querySelector(".on input").value,document.querySelector(".on textarea").value,document.querySelector(".on input[type='date']").value || e.target.getAttribute("value"),"",false],"edit",taskId)
 }
         }
 

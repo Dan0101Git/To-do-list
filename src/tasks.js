@@ -8,7 +8,7 @@ class Task{
         this.date = helpers.getDate(data.date);
      
         this.priority=data.priority;
-        this.taskCompletion=false;
+        this.taskCompletion=data.taskCompletion;
         this.id=crypto.randomUUID();
         this.nestedArray=[];
         this.type="task"

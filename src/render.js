@@ -7,6 +7,7 @@ import desciptionImage from "./images/icons/description.svg"
 import starUnfilled from "./images/icons/star-unfilled.svg";
 import arrowRight from "./images/icons/arrow-right.svg";
 import starFilled from "./images/icons/star-filled.svg"
+import tick from "./images/icons/tick.svg";
 const render=function(LibraryState){
   
     if(LibraryState.state==="create" || LibraryState.state==="delete")
@@ -62,7 +63,14 @@ const renderHelpers=(function(){
     function addTasks(task,taskDiv){
         const starImage=task.priority==="true"?starFilled:starUnfilled;
         const listClass=task.priority==="true"?"starred-list":null;
+        const circleImage=task.taskCompletion==="true"?tick:circleList;
+        const completionClass=task.taskCompletion==="true"?"completed-list":null;
         let dateClassTheme;
+        let noDate;
+        if(task.date==="Invalid Date")
+        {
+            noDate="no-date"
+        }
         if(task.date==="Today")
             dateClassTheme="urgent";
         else if(task.date==="Tomorrow")
@@ -70,8 +78,8 @@ const renderHelpers=(function(){
         else
             dateClassTheme="not-urgent";
         
-            taskDiv.innerHTML+=`<li data-set="${task.id}" data-title="${task.title}" data-descrip="${task.description}" data-date="${task.date}" data-starred="${task.priority}" class="all-tasks on ${listClass}" id="final-task-read"><div  class="tasks-lists "><div><span class="toggle-completion"><img src="${circleList}"></span><span class="task-title">${task.title}</span></div><div class="task-buttons" ><button data-set="${task.id}" class="expand-task"><img class="expand" src="${arrowRight}"></button><button data-set="${task.id}" class="star-task"><img class="star" src="${starImage}"></button><button data-set="${task.id}" class="delete-task"><img class="delete" src="${deleteBin}"></button></div>
-            </div>   <button class="${dateClassTheme}" dataset="${task.id}" id="date-button">${task.date}</button></li>
+            taskDiv.innerHTML+=`<li data-set="${task.id}" data-title="${task.title}" data-descrip="${task.description}" data-date="${task.date}" data-starred="${task.priority}" completed="${task.taskCompletion}" class="all-tasks on ${listClass} ${completionClass} " id="final-task-read"><div  class="tasks-lists "><div class="mark-list" data-set="${task.id}"><span class="strike-line"></span><span class="toggle-completion"><img src="${circleImage}"></span><span class="task-title">${task.title}</span></div><div class="task-buttons" ><button data-set="${task.id}" class="expand-task"><img class="expand" src="${arrowRight}"></button><button data-set="${task.id}" class="star-task"><img class="star" src="${starImage}"></button><button data-set="${task.id}" class="delete-task"><img class="delete" src="${deleteBin}"></button></div>
+            </div>   <button class="${dateClassTheme} ${noDate}" dataset="${task.id}" id="date-button">${task.date}</button></li>
             `;
 
 

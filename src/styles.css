@@ -8,7 +8,7 @@
     --main-font-family:"Quicksand", sans-serif;
     --container-bg:rgba(66, 66, 66, 0.296);
     --border-radius:1rem;
---base-font-size:clamp(12px,calc(9px + .5vw),5vw);
+--base-font-size:clamp(12px,calc(9px + .4vw),5vw);
 }
 html{
     font-size: var(--base-font-size);
@@ -206,7 +206,7 @@ section .project-card{
     min-height: 30vh;
     min-width: 20rem;
     max-width: 45vw;
-    padding:2rem .5rem;    border-radius: 1rem;
+    padding:1.6rem .5rem;    border-radius: 1rem;
     background-color: rgba(151, 151, 151, 0.139);
     display: flex;
     flex-direction: column;
@@ -290,9 +290,10 @@ background-size: cover;
    font-weight: 1400;
 }
 .project-card h1{
-    margin:0 auto;
+   
     letter-spacing: .3rem;
     padding:0 2rem;
+    padding-left: 1rem;
 }
 
 section .project-card:hover{
@@ -302,11 +303,10 @@ section .project-card:hover{
         box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
 .task-list{
-      padding:0 .5rem;
 width:100%;
 }
 .task-list>*{
-       padding:.3rem 1rem;
+       padding:.3rem .4rem;
        padding-right: .2rem;
 }
 .task-list-button{
@@ -412,12 +412,36 @@ content:url(images/icons/tick.svg);
 position: absolute;
 top:0;
 visibility: hidden;
+height:24px;
 
 }
 
 .toggle-completion:hover::before{
-    visibility: visible;
+    visibility: visible; 
+    background-color: rgba(7, 7, 7, 0.157);
+    border-radius: 50%;
 }
+.mark-list{
+    position: relative;
+}
+.strike-line {
+  content: '';
+  position: absolute;
+  height: 2px;
+  background: #444;
+  top: 50%;
+  left: -.1rem;
+  right: -.2rem;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 6s ease-in-out ;
+  pointer-events: none;
+}
+
+.completed-list .strike-line {
+  transform: scaleX(1);
+}
+
 div.task-buttons{
     gap:0;
 }
@@ -426,8 +450,8 @@ div.task-buttons{
     visibility: hidden;
 }
 .task-buttons button img{
-    width: 20px;
-    height: 20px;
+    width: 19px;
+    height: 19px;
 }
 .edit-task-form button{
        border:none;
@@ -452,7 +476,9 @@ color:black;
    background-color: rgba(152, 152, 152, 0.185);
     border-radius: 50%;
 }
-
+.completed-list .star-task,.completed-list .expand-task,.completed-list #date-button{
+    display: none;
+}
 .all-tasks{
     margin-bottom: .5rem;
 }
@@ -469,18 +495,21 @@ color:black;
 }
 #date-button{
     align-self: flex-start;
-    font-size: .8rem;
-    padding: .2rem;
+    font-size: .85rem;
+    padding: .35rem;
     border-radius: .6rem;
     border: 1px solid transparent;
-    background-color: rgba(35, 35, 35, 0.145);
-    color:#8573a7;
+    background-color: rgba(15, 15, 15, 0.075);
+    color:rgb(30, 121, 30)
+}
+#date-button.no-date{
+    display: none;
 }
 #date-button.urgent{
-color:maroon;
+color:rgb(96, 0, 0);
 }
 #date-button.mild-urgent{
-color:purple;
+color:rgb(95, 0, 95);
 }
 input#hiddenDate{
     opacity: 0;

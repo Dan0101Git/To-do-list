@@ -5,6 +5,7 @@ const data = (data) => ({
   description:data[1],
   date:data[2],
   priority:data[3],
+  taskCompletion:data[4],
 });
 const mapElement=function(element,parentId){
     if(element==="project")
