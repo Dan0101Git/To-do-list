@@ -3,7 +3,7 @@ class Task{
     constructor(data){
         this.title=data.title;
         this.description=data.description;
-        this.dueTime=data.dueTime;
+        this.date=data.dueDate;
         this.priority=data.priority;
         this.taskCompletion=false;
         this.id=crypto.randomUUID();

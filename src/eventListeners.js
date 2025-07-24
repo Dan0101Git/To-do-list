@@ -8,6 +8,7 @@ export default(function eventListeners(){
     domElements.submitProjectTitle.addEventListener("submit",eventListeningHelpers.createProject);
     domElements.submitTask.addEventListener("submit",eventListeningHelpers.createProject);
     domElements.cardContainer.addEventListener("click",eventListeningHelpers.createProject);
+    domElements.cardContainer.addEventListener("keyup",eventListeningHelpers.createProject);
     })
 
 })();

@@ -326,7 +326,7 @@ section .project-card:hover{
         gap:.1rem;
 }
 .edit-task-form{
-    width:80%;
+    width:100%;
     gap:.2rem;
  padding:0;
  display: flex;
@@ -339,11 +339,21 @@ section .project-card:hover{
 }
 .edit-task-form .inputs{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-direction: row;
     flex:1;
 }
-
+.inputs button.date-shortcut{
+    font-size: .7rem;
+    background :rgba(45, 45, 45, 0.112);
+    padding:.4rem;
+    border-radius: .5rem;
+}
+button.date-shortcut:hover{
+border-radius: .5rem;
+background-color:rgba(45, 45, 45, 0.094) ;
+color:black;
+}
 .tasks-lists input{
      font-weight: 600;
    font-size: 1rem;
@@ -375,6 +385,7 @@ font-family: var(--main-font-family);
     display: flex;
     align-items: center;
     gap:.5rem;
+    
 }
 .tasks-lists .task-title{
  font-weight: 600;
@@ -392,14 +403,18 @@ align-items: center;
 }
 .toggle-completion::before{
 content:url(images/icons/tick.svg);
+}
+.toggle-completion::before{
 position: absolute;
 top:0;
 visibility: hidden;
+
 }
+
 .toggle-completion:hover::before{
     visibility: visible;
 }
-.delete-task{
+.task-buttons button{
     border:none;
     visibility: hidden;
     height:2.5rem;
@@ -407,20 +422,32 @@ visibility: hidden;
 .edit-task-form button{
        border:none;
 }
+#edit-details{
+    display: flex;
+    gap:.3rem;
+    flex-direction: row;
+}
 #edit-task-descrip{
     height:3rem;
     width:100%;
+    background-color: transparent;
 }
-.delete-task:hover,.edit-task-form button:hover{
+
+#edit-input-task:focus{
+border-bottom: 2px solid #8573a7;
+color:black;
+}
+
+.delete-task:hover,.edit-task-form button:hover,.star-task:hover,.expand-task:hover{
    background-color: rgba(152, 152, 152, 0.185);
     border-radius: 50%;
 }
 
 
-.all-tasks:hover{
+.all-tasks:hover,.starred-list{
     background-color: rgba(147, 147, 147, 0.214);
 }
-.tasks-lists:hover .delete-task{
+.all-tasks:hover .task-buttons button,.starred-list .task-buttons button{
     visibility: visible;
 }
 .addTaskButton{

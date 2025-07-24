@@ -1,5 +1,6 @@
 import domElements from "./domElements";
 import { domCalls } from "./index";
+import domHelper from "./domhelper";
 const eventListeningHelpers=(function(){
     let taskEditFlag=0;
     let elemntflag;
@@ -44,15 +45,33 @@ const eventListeningHelpers=(function(){
       domCalls.createElement([domElements.projectInput.value],"project"); //index interaction 1
         }
         if(e.target.className==="task-form"){
-
+console.log(document.querySelector("#task-date").value);
         domElements.createTaskDialog.close();
-            domCalls.createElement([document.querySelector("#task-title").value,document.querySelector("#task-date").value,document.querySelector("#description").value],"task", domElements.createTaskDialog.getAttribute("data-set"));
+            domCalls.createElement([document.querySelector("#task-title").value,document.querySelector("#description").value,document.querySelector("#task-date").value,false],"task", domElements.createTaskDialog.getAttribute("data-set"));
         }
         if(e.target.className==="delete")
         {
-            console.log(e.target.parentNode);
+
             domCalls.deleteElement("",e.target.parentNode.getAttribute("data-set"));
             e.stopPropagation();
+        }
+           if(e.target.className==="star")
+        {
+            console.log(e.target.parentNode);
+            const taskId=e.target.parentNode.getAttribute("data-set");
+            const elementList=document.querySelector(`li[data-set="${taskId}"]`);
+            elementList.classList.toggle("starred-list")
+            elementList.setAttribute("data-starred",!(elementList.getAttribute("data-starred")==="true"));
+            domCalls.editElement(domHelper.getelementData(taskId),"star",taskId);
+            e.stopPropagation();
+        }
+
+        if(e.key==="Enter"){
+            if(e.target.tagName==="INPUT" || e.target.tagName==="TEXTAREA")
+{
+    const taskId=e.target.parentNode.getAttribute("data-set");
+   domCalls.editElement([document.querySelector(".on input").value,document.querySelector(".on textarea").value,"",""],"edit",taskId)
+}
         }
 
     }

@@ -11,7 +11,8 @@ import helper from "./helpers";
 
 const domCalls=(function(){
     function createElement(dataString,element,parentId){
-        mapElement(element,parentId).addChild(data(dataString));  
+        mapElement(element,parentId).addChild(data(dataString)); 
+   
         console.log(stateObject.myLibrary.nestedArray);
      helper.updateState("create");
      
@@ -22,7 +23,12 @@ const domCalls=(function(){
          console.log(stateObject.myLibrary.nestedArray);
          helper.updateState("delete");
     }
-    return {createElement,deleteElement};
+    function editElement(dataString,action,taskId){
+          const itemInfo=helper.detectItem(taskId);
+          itemInfo.parent.updateChild(itemInfo.child,data(dataString));
+          helper.updateState("create");
+    }
+    return {createElement,deleteElement,editElement};
 })();
 
 

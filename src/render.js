@@ -3,6 +3,10 @@ import addTask from "./images/icons/addTask.png"
 import deleteBin from "./images/icons/delete.svg"
 import circleList from "./images/icons/circle.svg"
 import calanderImage from "./images/icons/calender.svg"
+import desciptionImage from "./images/icons/description.svg"
+import starUnfilled from "./images/icons/star-unfilled.svg";
+import arrowRight from "./images/icons/arrow-right.svg";
+import starFilled from "./images/icons/star-filled.svg"
 const render=function(LibraryState){
   
     if(LibraryState.state==="create" || LibraryState.state==="delete")
@@ -56,10 +60,13 @@ const renderHelpers=(function(){
     
     }
     function addTasks(task,taskDiv){
-            taskDiv.innerHTML+=`<li data-set="${task.id}" class="all-tasks on" id="final-task-read"><div  class="tasks-lists "><div><span class="toggle-completion"><img src="${circleList}"></span><span class="task-title">${task.title}</span></div><div class="task-buttons" ><button data-set="${task.id}" class="delete-task"><img class="delete" src="${deleteBin}"></button></div></div></li>`;
-taskDiv.innerHTML+=`<li data-set="${task.id}" class="all-tasks" id="final-task-edit"><div  class="tasks-lists "><div><span class="toggle-completion"><img src="${circleList}"></span><input class="edit-task-title" value="${task.title}"></div></div><div class="edit-task"><form action="" class="edit-task-form">
-<textarea placeholder="Details" name="Description" id="edit-task-descrip" cols="10" rows="5"></textarea>    
-<div class="inputs"><button id="openDate"><img src="${calanderImage}"></button>
+        const starImage=task.priority==="true"?starFilled:starUnfilled;
+        const listClass=task.priority==="true"?"starred-list":"";
+            taskDiv.innerHTML+=`<li data-set="${task.id}" data-title="${task.title}" data-descrip="${task.description}" data-date="${task.date}" data-starred=${task.priority} class="all-tasks on ${listClass}" id="final-task-read"><div  class="tasks-lists "><div><span class="toggle-completion"><img src="${circleList}"></span><span class="task-title">${task.title}</span></div><div class="task-buttons" ><button data-set="${task.id}" class="expand-task"><img class="expand" src="${arrowRight}"></button><button data-set="${task.id}" class="star-task"><img class="star" src="${starImage}"></button><button data-set="${task.id}" class="delete-task"><img class="delete" src="${deleteBin}"></button></div></div></li>`;
+taskDiv.innerHTML+=`<li data-set="${task.id}" class="all-tasks" id="final-task-edit"><div  class="tasks-lists "><div data-set="${task.id}"><span class="toggle-completion"><img src="${circleList}"></span><input id="edit-input-task" class="edit-task-title" value="${task.title}"></div></div><div class="edit-task"><form action="" class="edit-task-form">
+<div id="edit-details" data-set="${task.id}"><img src="${desciptionImage}"><textarea value="${task.description}" placeholder="Details" name="Description" id="edit-task-descrip" cols="10" rows="5">${task.description}</textarea>   </div>
+ 
+<div class="inputs"><button class="date-shortcut">today</button><button class="date-shortcut">tomorrow</button><button id="openDate"><img src="${calanderImage}"></button>
 <input type="date" id="hiddenDate" style="display: none" />
 </div>
 </form></div></li>`;
