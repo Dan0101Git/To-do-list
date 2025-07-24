@@ -1,9 +1,12 @@
 import crudFunctionality from "./commonUtility";
+import helpers from "./helpers";
 class Task{
     constructor(data){
         this.title=data.title;
         this.description=data.description;
-        this.date=data.dueDate;
+    
+        this.date = helpers.getDate(data.date);
+     
         this.priority=data.priority;
         this.taskCompletion=false;
         this.id=crypto.randomUUID();

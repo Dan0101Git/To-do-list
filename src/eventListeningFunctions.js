@@ -14,7 +14,7 @@ const eventListeningHelpers=(function(){
         domElements.createTaskDialog.classList.add("enter-task");
         domElements.createTaskDialog.setAttribute("data-set",`${e.target.getAttribute("data-set")}`);
        domElements.createTaskDialog.showModal();
-    }console.log(e.target.className);
+    }console.log(e.target);
 
     if(e.target.className==="kebab" || document.querySelector(".menu-show")){
         if(document.querySelector(".menu-show"))
@@ -33,7 +33,16 @@ const eventListeningHelpers=(function(){
         e.target.parentNode.previousElementSibling.classList.toggle("on");
     }
 }
-
+if(e.target.className==="date-shortcut" && e.target.tagName==="IMG")
+{
+    const taskId=e.target.getAttribute("data-set");
+    const datePicker=document.querySelector(`li[data-set="${taskId}"] input[type="date"]`);
+    console.log(datePicker);
+    datePicker.showPicker();
+    datePicker.addEventListener("change",
+        createProject);
+       
+}
     
     }
 
@@ -60,17 +69,19 @@ console.log(document.querySelector("#task-date").value);
             console.log(e.target.parentNode);
             const taskId=e.target.parentNode.getAttribute("data-set");
             const elementList=document.querySelector(`li[data-set="${taskId}"]`);
-            elementList.classList.toggle("starred-list")
             elementList.setAttribute("data-starred",!(elementList.getAttribute("data-starred")==="true"));
             domCalls.editElement(domHelper.getelementData(taskId),"star",taskId);
             e.stopPropagation();
         }
 
-        if(e.key==="Enter"){
-            if(e.target.tagName==="INPUT" || e.target.tagName==="TEXTAREA")
+        if(e.key==="Enter" || e.target.getAttribute("type")==="date" || e.target.className==="date-shortcut"){
+            if(e.target.getAttribute("type")==="date")
+                e.currentTarget.removeEventListener("click",createProject);
+            if(e.target.tagName==="INPUT" || e.target.tagName==="TEXTAREA" || e.target.tagName==="BUTTON")
 {
+    console.log(document.querySelector("#final-task-edit"));
     const taskId=e.target.parentNode.getAttribute("data-set");
-   domCalls.editElement([document.querySelector(".on input").value,document.querySelector(".on textarea").value,"",""],"edit",taskId)
+   domCalls.editElement([document.querySelector(".on input").value,document.querySelector(".on textarea").value,document.querySelector(".on input[type='date']").value || e.target.getAttribute("value"),""],"edit",taskId)
 }
         }
 

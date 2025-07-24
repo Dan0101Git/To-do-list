@@ -9,7 +9,29 @@ export default (function helper(){
         stateObject.state=state;
         render(stateObject);
     }
-    return {detectItem,updateState}
+function getDate(date) {
+  const myDate = new Date(date);
+  const today = new Date();
+  console.log(date.charCodeAt(0));
+    if(date.charCodeAt(0) >= 65 && date.charCodeAt(0) <= 90)
+        return date;
+  // Remove time from both dates
+  const stripTime = (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+
+  const taskDate = stripTime(myDate);
+  const currentDate = stripTime(today);
+
+  const diffInDays = Math.round((taskDate - currentDate) / (1000 * 60 * 60 * 24));
+    
+
+  if (diffInDays === 0) return "Today";
+  if (diffInDays === 1) return "Tomorrow";
+
+  const options = { weekday: 'short', month: 'long', day: 'numeric' };
+  return taskDate.toLocaleDateString('en-US', options); // e.g. "Thu, July 25"
+}
+
+    return {detectItem,updateState,getDate}
 })();
 
 function findItem(itemId,searchObject){
@@ -24,7 +46,7 @@ function findItem(itemId,searchObject){
         if(project.id===itemId)
            {
         return {parent:searchObject,child:project};}
-
+ 
      const result=findItem(itemId,project);
     if(result)
     return result;}

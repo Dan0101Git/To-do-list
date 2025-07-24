@@ -3,7 +3,7 @@ import helpers from "./helpers";
 const data = (data) => ({
   title:data[0],
   description:data[1],
-  dueDate:data[2],
+  date:data[2],
   priority:data[3],
 });
 const mapElement=function(element,parentId){

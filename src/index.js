@@ -20,11 +20,13 @@ const domCalls=(function(){
     function deleteElement(element,parentId){
       const itemInfo=helper.detectItem(parentId);
       itemInfo.parent.deleteChild(itemInfo.child);
-         console.log(stateObject.myLibrary.nestedArray);
          helper.updateState("delete");
     }
     function editElement(dataString,action,taskId){
           const itemInfo=helper.detectItem(taskId);
+          console.log(dataString);
+          dataString[2]=helper.getDate(dataString[2]);
+          console.log(dataString,itemInfo,action);
           itemInfo.parent.updateChild(itemInfo.child,data(dataString));
           helper.updateState("create");
     }
