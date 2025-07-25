@@ -5,8 +5,9 @@ export default (function helper(){
     function detectItem(itemId){
         return findItem(itemId,Library);//returns the o bject/project/task subtask clicked upon
     }
-    function updateState(state){
+    function updateState(state,elementId){
         stateObject.state=state;
+        stateObject.id=elementId;
         render(stateObject);
     }
 function getDate(date) {

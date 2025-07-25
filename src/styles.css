@@ -214,6 +214,18 @@ section .project-card{
     position: relative;
     flex-shrink: 0;
 }
+.is-empty{
+      opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease-out forwards;
+}
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .kebab{
     position: absolute;
 right: .5rem;
@@ -357,6 +369,17 @@ border-radius: .5rem;
 background-color:rgba(45, 45, 45, 0.094) ;
 color:black;
 }
+.tasks-lists{
+    display: flex;
+    gap:1.5rem;
+    align-items: center;
+    display: flex;
+        font-weight: 500;
+        position: relative;
+        justify-content: space-between;
+        height:clamp(40px,2.2rem,100px);
+    
+}
 .tasks-lists input{
      font-weight: 600;
    font-size: 1rem;
@@ -374,17 +397,7 @@ font-family: var(--main-font-family);
       border-bottom: 2px solid purple;
       font-size: .8rem;
 }
-.tasks-lists{
-    display: flex;
-    gap:.3rem;
-    align-items: center;
-    display: flex;
-        font-weight: 500;
-        position: relative;
-        justify-content: space-between;
-        height:clamp(40px,2.2rem,100px);
-    
-}
+
 .tasks-lists>div{
     display: flex;
     align-items: center;
@@ -444,6 +457,7 @@ height:24px;
 
 div.task-buttons{
     gap:0;
+
 }
 .task-buttons button{
     border:none;

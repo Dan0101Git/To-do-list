@@ -10,7 +10,7 @@ import starFilled from "./images/icons/star-filled.svg"
 import tick from "./images/icons/tick.svg";
 const render=function(LibraryState){
   
-    if(LibraryState.state==="create" || LibraryState.state==="delete")
+    if(LibraryState.state==="create" || LibraryState.state==="delete" || LibraryState.state==="edit")
             displayCards();
    
 
@@ -18,13 +18,14 @@ const render=function(LibraryState){
     function displayCards(){
         renderHelpers.resetProjects();
         LibraryState.myLibrary.nestedArray.forEach((project)=>{
-            renderHelpers.createCard(project)
+            renderHelpers.createCard(project,LibraryState.state,LibraryState.id)
         })
     }
 
 }
 const renderHelpers=(function(){
-    function createCard(project){
+    function createCard(project,state,elementId){
+        let taskCounter=0;
         const kebabMenu=document.createElement("span");
         kebabMenu.classList.add("kebab");
         const card=document.createElement("div");
@@ -53,18 +54,32 @@ const renderHelpers=(function(){
         cardHeading.textContent=project.title;
             taskListButton.appendChild(taskButton);
         card.appendChild(cardHeading);
+        console.log(project);
+        if(project.nestedArray.length===0 && state==="create")
+            card.classList.add("is-empty");
+        project.nestedArray.forEach((task)=>{
+            console.log(elementId,task.id);
+            if(taskCounter===project.nestedArray.length-1 && elementId===task.id)
+                taskCounter="yes";
+            else
+            taskCounter++;
         
-        project.nestedArray.forEach((task)=>{addTasks(task,taskDiv)});
+            addTasks(task,taskDiv,state,taskCounter)
+        });
         card.appendChild(taskDiv);
         domElements.cardContainer.appendChild(card);
         card.appendChild(kebabMenu);
     
     }
-    function addTasks(task,taskDiv){
+    function addTasks(task,taskDiv,state,isLastTask){
         const starImage=task.priority==="true"?starFilled:starUnfilled;
-        const listClass=task.priority==="true"?"starred-list":null;
+        let listClass=task.priority==="true"?"starred-list":null;
         const circleImage=task.taskCompletion==="true"?tick:circleList;
         const completionClass=task.taskCompletion==="true"?"completed-list":null;
+        console.log(state);
+        if(state==="create" && isLastTask==="yes")
+            listClass+=" is-empty";  // taskCreation="is-empty"
+
         let dateClassTheme;
         let noDate;
         if(task.date==="Invalid Date")

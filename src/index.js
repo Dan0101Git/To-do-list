@@ -11,16 +11,18 @@ import helper from "./helpers";
 
 const domCalls=(function(){
     function createElement(dataString,element,parentId){
-        mapElement(element,parentId).addChild(data(dataString)); 
-   
+           
+      const elementCreated=  mapElement(element,parentId).addChild(data(dataString)); 
+        
         console.log(stateObject.myLibrary.nestedArray);
-     helper.updateState("create");
+     helper.updateState("create",elementCreated.id);
+     console.log(stateObject.id,elementCreated.id);
      
     }
     function deleteElement(element,parentId){
       const itemInfo=helper.detectItem(parentId);
       itemInfo.parent.deleteChild(itemInfo.child);
-         helper.updateState("delete");
+         helper.updateState("delete",parentId);
     }
     function editElement(dataString,action,taskId){
           const itemInfo=helper.detectItem(taskId);
@@ -28,7 +30,7 @@ const domCalls=(function(){
           dataString[2]=helper.getDate(dataString[2]);
           console.log(dataString,itemInfo,action);
           itemInfo.parent.updateChild(itemInfo.child,data(dataString));
-          helper.updateState("create");
+          helper.updateState("edit",taskId);
     }
     return {createElement,deleteElement,editElement};
 })();
@@ -47,15 +49,5 @@ const defaultProject=domCalls.createElement(["Default"],"project");
 
 // const subTask2=task2.addChild(data("start adding dom"));
 // const subTask3=task3.addChild(data("start making ui"));
-
-
-// const itemDelete=helper.detectItem(subTask2.id);
-// itemDelete.parent.deleteChild(itemDelete.child)
-
-// const itemUpdate=helper.detectItem(task2.id);
-// itemUpdate.parent.updateChild(itemUpdate.child,data("danish nayyar"));
-
-
-
 
 export {domCalls};
