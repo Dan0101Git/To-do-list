@@ -203,8 +203,8 @@ section .projects{
     align-items: flex-start;
 }
 section .project-card{
-    min-height: 30vh;
-    min-width: 20rem;
+    min-height: 42vh;
+    min-width: 26rem;
     max-width: 45vw;
     padding:1.6rem .5rem;    border-radius: 1rem;
     background-color: rgba(151, 151, 151, 0.139);
@@ -217,7 +217,7 @@ section .project-card{
 .is-empty{
       opacity: 0;
   transform: translateY(20px);
-  animation: fadeUp 0.6s ease-out forwards;
+  animation: fadeUp .2s ease-out forwards;
 }
 @keyframes fadeUp {
   to {
@@ -380,17 +380,22 @@ color:black;
         height:clamp(40px,2.2rem,100px);
     
 }
+#final-task-edit .tasks-lists>div{
+flex: 1;}
+#final-task-edit .tasks-lists>div input{
+    flex: 1;
+}
 .tasks-lists input{
      font-weight: 600;
    font-size: 1rem;
 background-color:transparent ;
-padding: 0;
+padding: .5rem 0;
 border: none;
 border-radius: 0;
 font-family: var(--main-font-family);
 }
 .tasks-lists input:hover{
-    border-bottom: 2px solid purple;
+    border-bottom: 1px solid purple;
     color: black;
 }
 .edit-task-form textarea{
@@ -482,7 +487,7 @@ div.task-buttons{
 }
 
 #edit-input-task:focus{
-border-bottom: 2px solid #8573a7;
+border-bottom: 1px solid #8573a7;
 color:black;
 }
 
@@ -495,9 +500,11 @@ color:black;
 }
 .all-tasks{
     margin-bottom: .5rem;
+    background-color: rgba(49, 49, 49, 0.018);
+       box-shadow: 0 .3px  1px rgba(0, 0, 0, 0.204);
 }
 .all-tasks:hover,.starred-list{
-    background-color: rgba(147, 147, 147, 0.214);
+    background-color: rgba(112, 86, 126, 0.125);
 }
 .all-tasks:hover .task-buttons button,.starred-list .task-buttons button{
     visibility: visible;

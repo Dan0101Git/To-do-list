@@ -17,7 +17,7 @@ const domCalls=(function(){
         console.log(stateObject.myLibrary.nestedArray);
      helper.updateState("create",elementCreated.id);
      console.log(stateObject.id,elementCreated.id);
-     
+     return elementCreated;
     }
     function deleteElement(element,parentId){
       const itemInfo=helper.detectItem(parentId);
@@ -42,12 +42,13 @@ const domCalls=(function(){
 const defaultProject=domCalls.createElement(["Default"],"project");
 
 
+const delay = 300;
+const taskData = [["complete danishtodo", "y8", "Today", ""],["do somehting about acid", "y8", "Tomorrow", "true"],["long term debt", "y8", "Sun, August 3", "false"]];
 
-
-// const task2=defaultProject.addChild(data("complete danishtodo","y8","today","higjtyh"));
-// const task3=defaultProject.addChild(data("complete gertodo","","today","high"));
-
-// const subTask2=task2.addChild(data("start adding dom"));
-// const subTask3=task3.addChild(data("start making ui"));
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => {
+    domCalls.createElement(taskData[i], "task", defaultProject.id);
+  }, i*delay);
+}
 
 export {domCalls};

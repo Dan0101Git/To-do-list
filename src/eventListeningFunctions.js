@@ -22,16 +22,22 @@ const eventListeningHelpers=(function(){
         else
          Array.from(e.target.children)[0].classList.toggle("menu-show");
     }
-   if (e.target.classList.contains("tasks-lists") && !e.target.parentNode.classList.contains("completed-list")) {
+
+   if ((e.target.closest(".all-tasks") && !e.target.closest(".all-tasks").classList.contains("completed-list") && e.target.tagName!=="BUTTON" && e.target.tagName!=="IMG" )||document.querySelector("#final-task-edit.on")) {
     console.log(e.target.nextElementSibling);
-
-    e.target.parentNode.classList.toggle("on");
-
-    if (e.target.parentNode.nextElementSibling && e.target.parentNode.getAttribute("data-set")===e.target.parentNode.nextElementSibling.getAttribute("data-set")) {
-        e.target.parentNode.nextElementSibling.classList.toggle("on");
-    } else {
-        e.target.parentNode.previousElementSibling.classList.toggle("on");
+    const taskList=e.target.closest(".all-tasks");
+    const editAreaList=document.querySelector("#final-task-edit.on");
+    console.log(editAreaList);
+    if(editAreaList && !e.target.closest("#final-task-edit.on"))
+    {
+        document.querySelector("#final-task-edit.on").classList.toggle("on");
+        editAreaList.previousElementSibling.classList.toggle("on");
     }
+    console.log(editAreaList);
+    if(taskList && !document.querySelector("#final-task-edit.on"))
+   {taskList.classList.toggle("on");
+        taskList.nextElementSibling.classList.toggle("on");} 
+
 }
 if(e.target.className==="date-shortcut" && e.target.tagName==="IMG")
 {
