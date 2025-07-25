@@ -88,13 +88,19 @@ console.log(document.querySelector("#task-date").value);
         }
 
         if(e.key==="Enter" || e.target.getAttribute("type")==="date" || e.target.className==="date-shortcut"){
+            const normalListMode=e.target.closest("#final-task-edit").previousElementSibling;
+            let dateButtonClicked="";
+            if(e.target.tagName==="BUTTON")
+                dateButtonClicked=e.target.getAttribute("value");
+            console.log(e.target.parentNode.parentNode.parentNode.previousElementSibling);//tick
             if(e.target.getAttribute("type")==="date")
                 e.currentTarget.removeEventListener("click",createProject);
             if(e.target.tagName==="INPUT" || e.target.tagName==="TEXTAREA" || e.target.tagName==="BUTTON")
 {
-    console.log(document.querySelector("#final-task-edit"));
+    console.log(e.target.parentNode.parentNode.parentNode.previousElementSibling);//tick
     const taskId=e.target.parentNode.getAttribute("data-set");
-   domCalls.editElement([document.querySelector(".on input").value,document.querySelector(".on textarea").value,document.querySelector(".on input[type='date']").value || e.target.getAttribute("value"),"",false],"edit",taskId)
+    console.log(document.querySelector(".on input[type='date']").value );
+   domCalls.editElement([document.querySelector(".on input").value,document.querySelector(".on textarea").value,document.querySelector(".on input[type='date']").value ||dateButtonClicked || normalListMode.getAttribute("data-date"),normalListMode.getAttribute("data-starred"),false],"edit",taskId)
 }
         }
 
