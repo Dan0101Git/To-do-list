@@ -23,8 +23,9 @@ const eventListeningHelpers=(function(){
          Array.from(e.target.children)[0].classList.toggle("menu-show");
     }
 
-   if ((e.target.closest(".all-tasks") && !e.target.closest(".all-tasks").classList.contains("completed-list") && e.target.tagName!=="BUTTON" && e.target.tagName!=="IMG" )||document.querySelector("#final-task-edit.on")) {
-    console.log(e.target.nextElementSibling);
+   if ((e.target.closest(".all-tasks") && !e.target.closest(".all-tasks").classList.contains("completed-list") && e.target.tagName!=="BUTTON" && e.target.tagName!=="IMG" && !e.target.matches(".toggle-completion") )||document.querySelector("#final-task-edit.on")) {
+    console.log(e.target);
+
     const taskList=e.target.closest(".all-tasks");
     const editAreaList=document.querySelector("#final-task-edit.on");
     console.log(editAreaList);
@@ -35,8 +36,14 @@ const eventListeningHelpers=(function(){
     }
     console.log(editAreaList);
     if(taskList && !document.querySelector("#final-task-edit.on"))
-   {taskList.classList.toggle("on");
-        taskList.nextElementSibling.classList.toggle("on");} 
+   {
+    taskList.classList.toggle("on");
+    
+        taskList.nextElementSibling.classList.toggle("on");
+        let titleInput=document.querySelector("#final-task-edit.on input[type='text']");
+titleInput.focus();
+titleInput.setSelectionRange(titleInput.value.length,titleInput.value.length);
+    } 
 
 }
 if(e.target.className==="date-shortcut" && e.target.tagName==="IMG")
@@ -87,7 +94,7 @@ console.log(document.querySelector("#task-date").value);
                domCalls.editElement(domHelper.getelementData(taskId),"circle",taskId);
         }
 
-        if(e.key==="Enter" || e.target.getAttribute("type")==="date" || e.target.className==="date-shortcut"){
+        if((e.key==="Enter" || e.target.getAttribute("type")==="date" || e.target.className==="date-shortcut") && e.target.closest("#final-task-edit")){
             const normalListMode=e.target.closest("#final-task-edit").previousElementSibling;
             let dateButtonClicked="";
             if(e.target.tagName==="BUTTON")
@@ -97,9 +104,11 @@ console.log(document.querySelector("#task-date").value);
                 e.currentTarget.removeEventListener("click",createProject);
             if(e.target.tagName==="INPUT" || e.target.tagName==="TEXTAREA" || e.target.tagName==="BUTTON")
 {
-    console.log(e.target.parentNode.parentNode.parentNode.previousElementSibling);//tick
+    console.log(e.target.closest(".om"));//tick
+    console.log(document.querySelector(".on textarea").value);//tick
+    console.log(document.querySelector(".on input[type='date']").value);//tick
+
     const taskId=e.target.parentNode.getAttribute("data-set");
-    console.log(document.querySelector(".on input[type='date']").value );
    domCalls.editElement([document.querySelector(".on input").value,document.querySelector(".on textarea").value,document.querySelector(".on input[type='date']").value ||dateButtonClicked || normalListMode.getAttribute("data-date"),normalListMode.getAttribute("data-starred"),false],"edit",taskId)
 }
         }

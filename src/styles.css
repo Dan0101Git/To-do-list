@@ -6,6 +6,7 @@
 :root{
     --body-bg:beige;
     --main-font-family:"Quicksand", sans-serif;
+    --heading-font-family:"Raleway", sans-serif;
     --container-bg:rgba(66, 66, 66, 0.296);
     --border-radius:1rem;
 --base-font-size:clamp(12px,calc(9px + .4vw),5vw);
@@ -169,6 +170,7 @@ button{
     gap:.8rem;
     align-items: center;
     font-size: .8rem;
+    position: absolute;
 }
 .create-project span{
     font-size: 1.8rem;
@@ -179,20 +181,106 @@ main{
     gap:7rem;
 }
 main>.navbar{
-    flex:2;
     background-color: rgba(229, 229, 213, 0.279);
-    padding:1rem 2rem;
+    padding:1rem 1.5rem;
     position: relative;
     display: flex;
     flex-direction: column;
     gap:2rem;
     padding-top: 3rem;
-    align-items: flex-start;
+    width: 19rem;
+    border-radius: .7rem;
 }
 .navbar .menu-image{
     position: absolute;
     left: .5rem;
     top:0
+}
+.navbar .projectList{
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+    margin:0 auto;
+    margin-top: 4.5rem;
+    width: 100%;
+    text-overflow: ellipsis;
+    height:100%;
+}
+ .projectList>*{
+    /* background-color: #9b8fb110; */
+    border-radius: .5rem;
+    padding:1rem .4rem;
+    display: flex;
+    gap:.5rem;
+    flex-direction: column;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+ }
+ .projectList button{
+    border:none;
+font-size: 1rem;
+}
+.categories button{
+    font-size: 1.2rem;
+    font-family: var(--heading-font-family);
+    background: none;
+    font-weight: 700;
+  display: flex;
+  width: 100%;
+}
+.categories li{
+    background-color: #0404040c;
+    border-radius: .6rem;
+    padding:.7rem;
+    display: flex;
+    align-items: center;
+}
+.projectList ul{
+    list-style-type:none;
+}
+
+.projectList ul>div{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.all-projects{
+   flex: 1;
+}
+.all-projects .toggle-projects-view{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.all-projects .toggle-projects-view span{
+    font-weight: 700;
+    font-size: 1.4rem;
+font-family: var(--heading-font-family);
+}
+.project-filter{
+    display: flex;
+    flex-direction: column;
+    gap:.5rem;
+    justify-content: center;
+}
+.project-filter>div{
+    display: flex;
+    align-items: center;
+    gap:.2rem;
+        background-color: #44444412;
+        border-radius: .6rem;
+        padding:.5rem;
+        padding-right: 1rem;
+}
+.project-filter span{
+    font-family: var(--heading-font-family);
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: inline-block;
+        white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 main>section{
     flex:8;
@@ -213,6 +301,8 @@ section .project-card{
     box-shadow: 0 8px 16px rgba(0,0,0,0.3);
     position: relative;
     flex-shrink: 0;
+     text-overflow: ellipsis;
+    overflow: hidden;
 }
 .is-empty{
       opacity: 0;
@@ -235,7 +325,6 @@ height:1.1rem;
 background-image: url("images/icons/kebab-vert.svg");
 background-repeat: no-repeat;
 background-size: cover;
-  visibility: hidden;
   padding:.9rem;
 }
 
@@ -258,7 +347,9 @@ background-size: cover;
 #final-task-edit{
     display: none;
 }
-
+#final-task-read.on,button{
+cursor: pointer;
+}
 .project-menu{
     position: absolute;
     top:1.8rem;
@@ -301,11 +392,14 @@ background-size: cover;
    transform: none;
    font-weight: 1400;
 }
-.project-card h1{
-   
+.project-card h1{max-width: 30rem;
+   font-family: var(--heading-font-family);
     letter-spacing: .3rem;
     padding:0 2rem;
     padding-left: 1rem;
+    white-space: nowrap;
+     text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 section .project-card:hover{
@@ -468,6 +562,17 @@ div.task-buttons{
     border:none;
     visibility: hidden;
 }
+.project-filter button{
+    border: none;
+    padding:.2rem;
+    width:2.3rem;
+    height:2.3rem;
+}
+.project-filter button img{
+    width:calc(12px + 1rem);
+    height:calc(12px +1rem );
+}
+
 .task-buttons button img{
     width: 19px;
     height: 19px;

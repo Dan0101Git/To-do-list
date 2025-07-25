@@ -38,17 +38,17 @@ const domCalls=(function(){
 
 
 
-
 const defaultProject=domCalls.createElement(["Default"],"project");
-
+ 
 
 const delay = 300;
 const taskData = [["complete danishtodo", "y8", "Today", ""],["do somehting about acid", "y8", "Tomorrow", "true"],["long term debt", "y8", "Sun, August 3", "false"]];
-
-for (let i = 0; i < 3; i++) {
+ const task1=domCalls.createElement(taskData[0], "task", defaultProject.id);
+for (let i = 1; i < 3; i++) {
   setTimeout(() => {
     domCalls.createElement(taskData[i], "task", defaultProject.id);
   }, i*delay);
 }
+
 
 export {domCalls};

@@ -7,6 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -19,8 +22,26 @@
             <img src="images/icons/menu.png" class="menu-image" alt="">
             <button class="create-project"><span>+</span>CREATE</button>
             <div class="projectList">
-                <ul><li>My Tasks</li></ul>
+                <ul class="categories"><li><img src="./images/icons/my-tasks.svg"><button class="my-tasks">My Tasks</button></li>
+               <li><img src="./images/icons/star-unfilled.svg"><button class="button starred-layout"> Starred</button></li> 
+                </ul>
+                <div class="all-projects">
+                    <div class="toggle-projects-view">
+                       <span>All Projects</span>
+                       <button><img src="./images/icons/arrow-right.svg" alt=""></button> 
+                    </div>
+                    <ul class="project-filter"></ul>
+</div>
+
             </div>
+
+
+
+
+
+
+
+
             <dialog class="add-project">
                 <form class="project-form" action="">
                 <div>

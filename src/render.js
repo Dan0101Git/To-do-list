@@ -8,6 +8,8 @@ import starUnfilled from "./images/icons/star-unfilled.svg";
 import arrowRight from "./images/icons/arrow-right.svg";
 import starFilled from "./images/icons/star-filled.svg"
 import tick from "./images/icons/tick.svg";
+import check from "./images/icons/check.svg"
+import checkBox from "./images/icons/checkBox.svg";
 const render=function(LibraryState){
   
     if(LibraryState.state==="create" || LibraryState.state==="delete" || LibraryState.state==="edit")
@@ -18,6 +20,7 @@ const render=function(LibraryState){
     function displayCards(){
         renderHelpers.resetProjects();
         LibraryState.myLibrary.nestedArray.forEach((project)=>{
+            renderHelpers.updateSidebarProjects(project);
             renderHelpers.createCard(project,LibraryState.state,LibraryState.id)
         })
     }
@@ -79,7 +82,7 @@ const renderHelpers=(function(){
         console.log(state);
         if(state==="create" && isLastTask==="yes")
             listClass+=" is-empty";  // taskCreation="is-empty"
-
+       
         let dateClassTheme;
         let noDate;
         if(task.date==="Invalid Date")
@@ -98,18 +101,34 @@ const renderHelpers=(function(){
             `;
 
 
-            taskDiv.innerHTML+=`<li data-set="${task.id}" class="all-tasks" id="final-task-edit"><div  class="tasks-lists "><div data-set="${task.id}"><span class="toggle-completion"><img src="${circleList}"></span><input id="edit-input-task" class="edit-task-title" value="${task.title}"></div></div><div class="edit-task"><form action="" class="edit-task-form">
+            taskDiv.innerHTML+=`<li data-set="${task.id}" class="all-tasks" id="final-task-edit"><div  class="tasks-lists "><div data-set="${task.id}"><span class="toggle-completion"><img src="${circleList}"></span><input type="text" id="edit-input-task" class="edit-task-title" value="${task.title}"></div></div><div class="edit-task"><form action="" class="edit-task-form">
 <div id="edit-details" data-set="${task.id}"><img src="${desciptionImage}"><textarea value="${task.description}" placeholder="Details" name="Description" id="edit-task-descrip" cols="10" rows="5">${task.description}</textarea>   </div>
  
 <div class="inputs" data-set="${task.id}"><button value="Today" class="date-shortcut">Today</button><button value="Tomorrow" class="date-shortcut">Tomorrow</button><button id="openDate"><img data-set="${task.id}" class="date-shortcut" src="${calanderImage}"></button>
 <input value="${task.date}" type="date" id="hiddenDate"  />
 </div>
 </form></div></li>`;
+
+
+           
+        
     }
+function updateSidebarProjects(project){
+    const projectList=document.querySelector(".project-filter");
+    const checkImage=checkBox;
+    console.log(projectList)
+    projectList.innerHTML+=`<div data-set="${project.id}" class="project ${project.title}">
+    <button class="toggle-project-view"><img src="${checkImage}"></button>
+    <span class="project-title-checkbox">${project.title}</span>
+    </div>`;
+
+}
+
     function resetProjects(){
+        Array.from(document.querySelector(".navbar .project-filter").children).forEach((project)=>{project.remove();})
          Array.from(domElements.cardContainer.children).forEach((project)=>{project.remove();})
     }
-    return{createCard,resetProjects}
+    return{createCard,resetProjects,updateSidebarProjects}
 })();
 
 export default render;
