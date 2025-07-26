@@ -188,7 +188,7 @@ main>.navbar{
     flex-direction: column;
     gap:2rem;
     padding-top: 3rem;
-    width: 19rem;
+    min-width: 19rem;
     border-radius: .7rem;
 }
 .navbar .menu-image{
@@ -196,10 +196,13 @@ main>.navbar{
     left: .5rem;
     top:0
 }
+.categories li:has(.view-tasks){
+    background-color: #7500bd26;
+}
 .navbar .projectList{
     display: flex;
     flex-direction: column;
-    gap:2rem;
+    gap:1rem;
     margin:0 auto;
     margin-top: 4.5rem;
     width: 100%;
@@ -272,6 +275,9 @@ font-family: var(--heading-font-family);
         border-radius: .6rem;
         padding:.5rem;
         padding-right: 1rem;
+}
+.project-filter>div:hover{
+    background-color: #00000020;
 }
 .project-filter span{
     font-family: var(--heading-font-family);
@@ -641,4 +647,12 @@ input#hiddenDate{
     opacity: 0;
     pointer-events: none;
     position: absolute;
+}
+hr.x-line{
+    border-radius: 0;
+    padding:0;
+    width:70%;
+    margin:0 auto;
+    color:black;
+   
 }
