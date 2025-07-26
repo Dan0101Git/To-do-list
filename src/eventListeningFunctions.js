@@ -23,19 +23,20 @@ const eventListeningHelpers=(function(){
          Array.from(e.target.children)[0].classList.toggle("menu-show");
     }
 
-   if ((e.target.closest(".all-tasks") && !e.target.closest(".all-tasks").classList.contains("completed-list") && e.target.tagName!=="BUTTON" && e.target.tagName!=="IMG" && !e.target.matches(".toggle-completion") )||document.querySelector("#final-task-edit.on")) {
-    console.log(e.target);
+   if ((e.target.closest(".all-tasks") && e.target.tagName!=="BUTTON" && e.target.tagName!=="IMG" && !e.target.matches(".toggle-completion") )||document.querySelector("#final-task-edit.on")) {
+
 
     const taskList=e.target.closest(".all-tasks");
+    console.log(taskList);
     const editAreaList=document.querySelector("#final-task-edit.on");
-    console.log(editAreaList);
+    // console.log(editAreaList);
     if(editAreaList && !e.target.closest("#final-task-edit.on"))
     {
         document.querySelector("#final-task-edit.on").classList.toggle("on");
         editAreaList.previousElementSibling.classList.toggle("on");
     }
-    console.log(editAreaList);
-    if(taskList && !document.querySelector("#final-task-edit.on"))
+    // console.log(editAreaList);
+    if(taskList && !document.querySelector("#final-task-edit.on") && !e.target.closest(".all-tasks").classList.contains("completed-list"))
    {
     taskList.classList.toggle("on");
     
@@ -64,7 +65,7 @@ if(e.target.className==="date-shortcut" && e.target.tagName==="IMG")
         if(e.target.className==="project-form"){
                  
                 domElements.createProjectDialog.close();
-      domCalls.createElement([domElements.projectInput.value],"project"); //index interaction 1
+      domCalls.createElement([domElements.projectInput.value,"","","","","true"],"project"); //index interaction 1
         }
         if(e.target.className==="task-form"){
 console.log(document.querySelector("#task-date").value);

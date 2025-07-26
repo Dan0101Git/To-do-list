@@ -5,6 +5,7 @@ import Task from "./tasks";
 class myProject{
     constructor(data){
             this.title=data.title;
+            this.view=data.view;
      this.id=crypto.randomUUID();
     this.type="project";
     this.nestedArray=[];//contsains all tasks here

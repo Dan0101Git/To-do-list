@@ -10,10 +10,9 @@ import starFilled from "./images/icons/star-filled.svg"
 import tick from "./images/icons/tick.svg";
 import check from "./images/icons/check.svg"
 import checkBox from "./images/icons/checkBox.svg";
-import renderUi from "./render-categories";
 
 const renderHelpers=(function(){
-    function createCard(project,state,elementId){
+    function createCard(project,title,state,elementId){
         let taskCounter=0;
      
         const card=document.createElement("div");
@@ -33,15 +32,19 @@ const renderHelpers=(function(){
         taskButton.textContent="Add a New Task";
         taskButton.classList.add("addTaskButton")
         card.classList.add("project-card");
+        if(document.querySelector(".starred-layout.view-tasks"))
+            card.classList.add("view-starred");
 
-        cardHeading.textContent=project.title;
+        cardHeading.textContent=title;
             taskListButton.appendChild(taskButton);
         card.appendChild(cardHeading);
-        console.log(project);
-        if(project.nestedArray.length===0 && state==="create")
-            card.classList.add("is-empty");
-       makeTask(project,taskCounter,elementId,taskDiv,state);
+            card.appendChild(taskDiv);
+        domElements.cardContainer.appendChild(card);
+
+
        if(!document.querySelector(".starred-layout.view-tasks") ){
+                if(project.nestedArray.length===0 && state==="create")
+            card.classList.add("is-empty");
                  const kebabMenu=document.createElement("span");
         kebabMenu.classList.add("kebab");
         const cardActionMenuHtml=`                 <div class="project-menu">
@@ -50,31 +53,29 @@ const renderHelpers=(function(){
                     </button><button class="delete">Delete Project</button></div>
                  </div>`;
                  kebabMenu.innerHTML+=cardActionMenuHtml;
-        card.appendChild(taskDiv);
-        domElements.cardContainer.appendChild(card);
-        card.appendChild(kebabMenu);
     
+        card.appendChild(kebabMenu);
+    return taskDiv;
        }
        else 
        return;
         
     }
-    function makeTask(project,taskCounter,elementId,taskDiv,state){      
-        project.nestedArray.forEach((task)=>{
-           
-            if(taskCounter===project.nestedArray.length-1 && elementId===task.id)
+    function checkLastElement(){
+      if(taskCounter===project.nestedArray.length-1 && elementId===task.id)
                 taskCounter="yes";
             else
             taskCounter++;
         
-            addTasks(task,taskDiv,state,taskCounter)
-        });}
-    function addTasks(task,taskDiv,state,isLastTask){
+    }
+
+    function addTasks(task,state,isLastTask){
         const starImage=task.priority==="true"?starFilled:starUnfilled;
         let listClass=task.priority==="true"?"starred-list":null;
         const circleImage=task.taskCompletion==="true"?tick:circleList;
         const completionClass=task.taskCompletion==="true"?"completed-list":null;
-        if(state==="create" && isLastTask==="yes")
+   
+        if(state==="create" && isLastTask==="yes" && !document.querySelector(".starred-layout.view-tasks"))
             listClass+=" is-empty";  // taskCreation="is-empty"
        
         let dateClassTheme;
@@ -89,7 +90,6 @@ const renderHelpers=(function(){
             dateClassTheme="mild-urgent";
         else
             dateClassTheme="not-urgent";
-                console.log(state, task.priority);
 
                 const taskListHtml=`<li data-set="${task.id}" data-title="${task.title}" data-descrip="${task.description}" data-date="${task.date}" data-starred="${task.priority}" completed="${task.taskCompletion}" class="all-tasks on ${listClass} ${completionClass} " id="final-task-read"><div  class="tasks-lists "><div class="mark-list" data-set="${task.id}"><span class="strike-line"></span><span class="toggle-completion"><img src="${circleImage}"></span><span class="task-title">${task.title}</span></div><div class="task-buttons" ><button data-set="${task.id}" class="expand-task"><img class="expand" src="${arrowRight}"></button><button data-set="${task.id}" class="star-task"><img class="star" src="${starImage}"></button><button data-set="${task.id}" class="delete-task"><img class="delete" src="${deleteBin}"></button></div>
             </div>   <button class="${dateClassTheme} ${noDate}" dataset="${task.id}" id="date-button">${task.date}</button></li>
@@ -100,23 +100,17 @@ const renderHelpers=(function(){
 <input value="${task.date}" type="date" id="hiddenDate"  />
 </div>
 </form></div></li>`;
-        if(document.querySelector(".starred-layout.view-tasks") && task.priority==="true"){
-                         console.log(taskListHtml)
-                
-            renderUi.takeStarredTasks(taskListHtml)
-
-
-        }
-            taskDiv.innerHTML+=taskListHtml;
+    return taskListHtml
     }
 
 
 function updateSidebarProjects(project){
     const projectList=document.querySelector(".project-filter");
-    const checkImage=checkBox;
-    console.log(projectList)
-    projectList.innerHTML+=`<div data-set="${project.id}" class="project ${project.title}">
-    <button class="toggle-project-view"><img src="${checkImage}"></button>
+    
+    const checkImage=project.view==="true"?check:checkBox;
+       const checkedStatus=project.view==="true"?"true":"false";
+    projectList.innerHTML+=`<div data-title="${project.title}" data-set="${project.id}" class="project ${project.title}">
+    <button class="toggle-project-view ${checkedStatus}"><img src="${checkImage}"></button>
     <span class="project-title-checkbox">${project.title}</span>
     </div>`;
 
@@ -124,11 +118,12 @@ function updateSidebarProjects(project){
 
     function resetProjects(){
         Array.from(document.querySelector(".navbar .project-filter").children).forEach((project)=>{project.remove();})
-                 console.log( document.querySelector(".projects"));
  
         Array.from(document.querySelector(".projects").children).forEach((project)=>{project.remove();})
-         console.log(  document.querySelector(".projects .project-card"));
     }
-    return{createCard,resetProjects,updateSidebarProjects}
+
+
+
+    return{createCard,resetProjects,updateSidebarProjects,addTasks}
 })();
 export default renderHelpers

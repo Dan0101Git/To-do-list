@@ -188,7 +188,7 @@ main>.navbar{
     flex-direction: column;
     gap:2rem;
     padding-top: 3rem;
-    min-width: 19rem;
+width:20rem;
     border-radius: .7rem;
 }
 .navbar .menu-image{
@@ -197,7 +197,8 @@ main>.navbar{
     top:0
 }
 .categories li:has(.view-tasks){
-    background-color: #7500bd26;
+    background-color: #a43be526;
+    box-shadow: 0px 2px 6px rgba(62, 62, 62, 0.567);
 }
 .navbar .projectList{
     display: flex;
@@ -310,6 +311,19 @@ section .project-card{
      text-overflow: ellipsis;
     overflow: hidden;
 }
+.project-card.view-starred{
+    width:60%;
+    max-width: 45vw;
+}
+.projects:has(.project-card.view-starred){
+    align-items: center;
+    justify-content: center;
+}
+main:has(.project-card.view-starred){
+    gap:0rem;
+}
+
+
 .is-empty{
       opacity: 0;
   transform: translateY(20px);

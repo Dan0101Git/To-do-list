@@ -6,11 +6,12 @@ const data = (data) => ({
   date:data[2],
   priority:data[3],
   taskCompletion:data[4],
+  view:data[5],
 });
 const mapElement=function(element,parentId){
     if(element==="project")
         return Library
-    if(element==="task")
+    if(element==="task") 
     {
                 return helpers.detectItem(parentId).child;
     }

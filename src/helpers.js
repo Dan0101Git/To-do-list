@@ -13,7 +13,6 @@ export default (function helper(){
 function getDate(date) {
   const myDate = new Date(date);
   const today = new Date();
-  console.log(date.charCodeAt(0));
     if(date.charCodeAt(0) >= 65 && date.charCodeAt(0) <= 90)
         return date;
   // Remove time from both dates
