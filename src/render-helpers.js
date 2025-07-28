@@ -21,6 +21,7 @@ const renderHelpers=(function(){
         const taskListButton=document.createElement("li");
  
         taskListButton.classList.add("task-list-button");
+        taskListButton.classList.add("clickable");
         taskListButton.setAttribute("data-set",`${project.id}`);
         const taskImage=document.createElement("img");
         taskImage.setAttribute("src",addTask);
@@ -58,7 +59,7 @@ const renderHelpers=(function(){
     return taskDiv;
        }
        else 
-       return;
+     return;
         
     }
     function checkLastElement(){
@@ -70,6 +71,7 @@ const renderHelpers=(function(){
     }
 
     function addTasks(task,state,isLastTask){
+        let taskListHtml;
         const starImage=task.priority==="true"?starFilled:starUnfilled;
         let listClass=task.priority==="true"?"starred-list":null;
         const circleImage=task.taskCompletion==="true"?tick:circleList;
@@ -90,10 +92,23 @@ const renderHelpers=(function(){
             dateClassTheme="mild-urgent";
         else
             dateClassTheme="not-urgent";
-
-                const taskListHtml=`<li data-set="${task.id}" data-title="${task.title}" data-descrip="${task.description}" data-date="${task.date}" data-starred="${task.priority}" completed="${task.taskCompletion}" class="all-tasks on ${listClass} ${completionClass} " id="final-task-read"><div  class="tasks-lists "><div class="mark-list" data-set="${task.id}"><span class="strike-line"></span><span class="toggle-completion"><img src="${circleImage}"></span><span class="task-title">${task.title}</span></div><div class="task-buttons" ><button data-set="${task.id}" class="expand-task"><img class="expand" src="${arrowRight}"></button><button data-set="${task.id}" class="star-task"><img class="star" src="${starImage}"></button><button data-set="${task.id}" class="delete-task"><img class="delete" src="${deleteBin}"></button></div>
+    if(state==="create-button"&& isLastTask===task.id){
+        console.log("hey man danish");
+       taskListHtml=`<li data-set="${task.id}" data-title="${task.title}" data-descrip="${task.description}" data-date="${task.date}" data-starred="${task.priority}" completed="${task.taskCompletion}" class="all-tasks  ${listClass} ${completionClass} " id="final-task-read"><div  class="tasks-lists "><div class="mark-list" data-set="${task.id}"><span class="strike-line"></span><span class="toggle-completion"><img src="${circleImage}"></span><span class="task-title">${task.title}</span></div><div class="task-buttons" ><button data-set="${task.id}" class="expand-task"><img class="expand" src="${arrowRight}"></button><button data-set="${task.id}" class="star-task"><img class="star" src="${starImage}"></button><button data-set="${task.id}" class="delete-task"><img class="delete" src="${deleteBin}"></button></div>
             </div>   <button class="${dateClassTheme} ${noDate}" dataset="${task.id}" id="date-button">${task.date}</button></li>
-            <li data-set="${task.id}" class="all-tasks" id="final-task-edit"><div  class="tasks-lists "><div data-set="${task.id}"><span class="toggle-completion"><img src="${circleList}"></span><input type="text" id="edit-input-task" class="edit-task-title" value="${task.title}"></div></div><div class="edit-task"><form action="" class="edit-task-form">
+            <li data-set="${task.id}" class="all-tasks on isNew" id="final-task-edit"><div  class="tasks-lists "><div data-set="${task.id}"><span class="toggle-completion"><img src="${circleList}"></span><input type="text" id="edit-input-task" class="edit-task-title" value="${task.title}"></div></div><div class="edit-task"><form action="" class="edit-task-form">
+<div id="edit-details" data-set="${task.id}"><img src="${desciptionImage}"><textarea value="${task.description}" placeholder="Details" name="Description" id="edit-task-descrip" cols="10" rows="5">${task.description}</textarea>   </div>
+ 
+<div class="inputs" data-set="${task.id}"><button value="Today" class="date-shortcut">Today</button><button value="Tomorrow" class="date-shortcut">Tomorrow</button><button id="openDate"><img data-set="${task.id}" class="date-shortcut" src="${calanderImage}"></button>
+<input value="${task.date}" type="date" id="hiddenDate"  />
+</div>
+</form></div></li>`;
+    }
+         
+else
+         taskListHtml=`<li data-set="${task.id}" data-title="${task.title}" data-descrip="${task.description}" data-date="${task.date}" data-starred="${task.priority}" completed="${task.taskCompletion}" class="all-tasks on ${listClass} ${completionClass} " id="final-task-read"><div  class="tasks-lists "><div class="mark-list" data-set="${task.id}"><span class="strike-line"></span><span class="toggle-completion"><img src="${circleImage}"></span><span class="task-title">${task.title}</span></div><div class="task-buttons" ><button data-set="${task.id}" class="expand-task"><img class="expand" src="${arrowRight}"></button><button data-set="${task.id}" class="star-task"><img class="star" src="${starImage}"></button><button data-set="${task.id}" class="delete-task"><img class="delete" src="${deleteBin}"></button></div>
+            </div>   <button class="${dateClassTheme} ${noDate}" dataset="${task.id}" id="date-button">${task.date}</button></li>
+            <li data-set="${task.id}" class="all-tasks " id="final-task-edit"><div  class="tasks-lists "><div data-set="${task.id}"><span class="toggle-completion"><img src="${circleList}"></span><input type="text" id="edit-input-task" class="edit-task-title" value="${task.title}"></div></div><div class="edit-task"><form action="" class="edit-task-form">
 <div id="edit-details" data-set="${task.id}"><img src="${desciptionImage}"><textarea value="${task.description}" placeholder="Details" name="Description" id="edit-task-descrip" cols="10" rows="5">${task.description}</textarea>   </div>
  
 <div class="inputs" data-set="${task.id}"><button value="Today" class="date-shortcut">Today</button><button value="Tomorrow" class="date-shortcut">Tomorrow</button><button id="openDate"><img data-set="${task.id}" class="date-shortcut" src="${calanderImage}"></button>
@@ -118,12 +133,40 @@ function updateSidebarProjects(project){
 
     function resetProjects(){
         Array.from(document.querySelector(".navbar .project-filter").children).forEach((project)=>{project.remove();})
- 
+        if(document.querySelector(".task-form .starred"))
+            document.querySelector(".task-form .starred").remove();
         Array.from(document.querySelector(".projects").children).forEach((project)=>{project.remove();})
     }
 
+function makeCustomStarredModalDropDown(projectTitle,projectId){
+    let value;
+    if(  document.querySelector(".task-form .starred")){
+       value = JSON.stringify({ title: projectTitle, id: projectId });
+document.querySelector(".drop.starred #projects-drop").innerHTML +=
+  `<option value='${value}'>${projectTitle}</option>`;
+    }
+    else{             const dropDown=document.createElement("div");
+       dropDown.classList.add("drop");
+                dropDown.classList.add("starred");
+
+        const cardActionMenuHtml=`<select id="projects-drop">`;
+                dropDown.innerHTML=cardActionMenuHtml;
+                 document.querySelector(".task-form").insertBefore(dropDown,document.querySelector(".task-form .buttons"));
+ value = JSON.stringify({ title: projectTitle, id: projectId });
+document.querySelector(".drop.starred #projects-drop").innerHTML +=
+  `<option value='${value}'>${projectTitle}</option>`;
+}
+        
+}
+function getReversedArray(normalArray){
+const reversedArray=[];
+for(let i=normalArray.length-1;i>=0;i--){
+    reversedArray.push(normalArray[i]);
+}
+return reversedArray;
+}
 
 
-    return{createCard,resetProjects,updateSidebarProjects,addTasks}
+    return{createCard,resetProjects,updateSidebarProjects,addTasks,makeCustomStarredModalDropDown,getReversedArray};
 })();
 export default renderHelpers

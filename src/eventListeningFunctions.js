@@ -1,51 +1,33 @@
 import domElements from "./domElements";
 import { domCalls } from "./index";
 import domHelper from "./domhelper";
+import handlerHelpers from "./handlerHelper";
+import uiState from "./uiState";
 const eventListeningHelpers=(function(){
     let taskEditFlag=0;
     let elemntflag;
     function buttonCreateProject(e){
-        if(e.target=== domElements.createProjectButt){ 
-            domElements.createProjectDialog.classList.add("enter-project");
-    domElements.createProjectDialog.showModal();}
-   
-    if(e.target.className==="task-list-button")
-    {
-        domElements.createTaskDialog.classList.add("enter-task");
-        domElements.createTaskDialog.setAttribute("data-set",`${e.target.getAttribute("data-set")}`);
-       domElements.createTaskDialog.showModal();
-    }console.log(e.target);
+console.log(e.target);
+        if(handlerHelpers.isElementClicked(e,".create-project"))
+            handlerHelpers.openAddProjectModal();  
 
-    if(e.target.className==="kebab" || document.querySelector(".menu-show")){
-        if(document.querySelector(".menu-show"))
-        document.querySelector(".menu-show").classList.toggle("menu-show");
-        else
-         Array.from(e.target.children)[0].classList.toggle("menu-show");
+   //
+    // if(e.target.className==="task-list-button")
+    // {
+    //     domElements.createTaskDialog.classList.add("enter-task");
+    //     domElements.createTaskDialog.setAttribute("data-set",`${e.target.getAttribute("data-set")}`);
+    //    domElements.createTaskDialog.showModal();
+    // }console.log(e.target);
+
+    if(handlerHelpers.isElementClicked(e,".kebab") || handlerHelpers.isblurMenuOpened(".menu-show")){
+       handlerHelpers.toggleMenuVisbility(".project-menu","menu-show")
     }
 
-   if ((e.target.closest(".all-tasks") && e.target.tagName!=="BUTTON" && e.target.tagName!=="IMG" && !e.target.matches(".toggle-completion") )||document.querySelector("#final-task-edit.on")) {
-
-
-    const taskList=e.target.closest(".all-tasks");
-    console.log(taskList);
-    const editAreaList=document.querySelector("#final-task-edit.on");
-    // console.log(editAreaList);
-    if(editAreaList && !e.target.closest("#final-task-edit.on"))
-    {
-        document.querySelector("#final-task-edit.on").classList.toggle("on");
-        editAreaList.previousElementSibling.classList.toggle("on");
-    }
-    // console.log(editAreaList);
-    if(taskList && !document.querySelector("#final-task-edit.on") && !e.target.closest(".all-tasks").classList.contains("completed-list"))
-   {
-    taskList.classList.toggle("on");
-    
-        taskList.nextElementSibling.classList.toggle("on");
-        let titleInput=document.querySelector("#final-task-edit.on input[type='text']");
-titleInput.focus();
-titleInput.setSelectionRange(titleInput.value.length,titleInput.value.length);
-    } 
-
+   if ((handlerHelpers.isElementClicked(e,".all-tasks") && e.target.tagName!=="BUTTON" && e.target.tagName!=="IMG" && !e.target.matches(".toggle-completion") )||(handlerHelpers.isblurMenuOpened("#final-task-edit.on") && !e.target.closest(".clickable"))) {
+const editAreaTask = document.querySelector("#final-task-edit.on");
+const readAreaTask=e.target.closest("#final-task-read");
+console.log(readAreaTask);
+ handlerHelpers.handletaskEditable(e,editAreaTask,readAreaTask);
 }
 if(e.target.className==="date-shortcut" && e.target.tagName==="IMG")
 {
@@ -70,7 +52,22 @@ if(e.target.className==="date-shortcut" && e.target.tagName==="IMG")
         if(e.target.className==="task-form"){
 console.log(document.querySelector("#task-date").value);
         domElements.createTaskDialog.close();
+                    if(document.querySelector(".starred-layout.view-tasks")){
+                        const selected=document.querySelector("#projects-drop").value;
+                        const valueObject=JSON.parse(selected);
+                        console.log(valueObject);
+                        domCalls.createElement([document.querySelector("#task-title").value,document.querySelector("#description").value,document.querySelector("#task-date").value,"true",false],"task", valueObject.id);
+
+                    }
+else
             domCalls.createElement([document.querySelector("#task-title").value,document.querySelector("#description").value,document.querySelector("#task-date").value,false,false],"task", domElements.createTaskDialog.getAttribute("data-set"));
+        }
+        console.log(e.target);
+        if(e.target.closest(".task-list-button")){
+            console.log("hmm")
+            domCalls.createElement(["","","","",false,false],"button", e.target.closest(".task-list-button").getAttribute("data-set"));
+               let titleInput=document.querySelector("#final-task-edit.on input[type='text']");
+titleInput.focus();
         }
         if(e.target.className==="delete")
         {
@@ -93,7 +90,8 @@ console.log(document.querySelector("#task-date").value);
             const elementList=document.querySelector(`li[data-set="${taskId}"]`);
             elementList.setAttribute("completed",!(elementList.getAttribute("completed")==="true"));
                domCalls.editElement(domHelper.getelementData(taskId),"circle",taskId);
-        }
+            uiState.taskMode="read";
+            }
 
         if((e.key==="Enter" || e.target.getAttribute("type")==="date" || e.target.className==="date-shortcut") && e.target.closest("#final-task-edit")){
             const normalListMode=e.target.closest("#final-task-edit").previousElementSibling;
@@ -105,13 +103,11 @@ console.log(document.querySelector("#task-date").value);
                 e.currentTarget.removeEventListener("click",createProject);
             if(e.target.tagName==="INPUT" || e.target.tagName==="TEXTAREA" || e.target.tagName==="BUTTON")
 {
-    console.log(e.target.closest(".om"));//tick
-    console.log(document.querySelector(".on textarea").value);//tick
-    console.log(document.querySelector(".on input[type='date']").value);//tick
 
     const taskId=e.target.parentNode.getAttribute("data-set");
    domCalls.editElement([document.querySelector(".on input").value,document.querySelector(".on textarea").value,document.querySelector(".on input[type='date']").value ||dateButtonClicked || normalListMode.getAttribute("data-date"),normalListMode.getAttribute("data-starred"),false],"edit",taskId)
 }
+uiState.taskMode="read";
         }
 
     }

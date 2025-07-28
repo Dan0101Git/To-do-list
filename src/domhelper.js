@@ -8,6 +8,10 @@ const domHelper=(function(){
     console.log(elementList)
     return [elementList.getAttribute("data-title"),elementList.getAttribute("data-descrip"),elementList.getAttribute("data-date"),elementList.getAttribute("data-starred"),elementList.getAttribute("completed")];
     }
+    function isElementEmpty(element){
+        if(document.querySelector(".on.isNew input").value===""&& document.querySelector(".on.isNew textarea").value==="" && document.querySelector(".on.isNew").previousElementSibling.getAttribute("data-date")==="Invalid Date")
+            return true;
+    }
     function changeUiState(e){
         if(e.target.matches(".my-tasks"))
         {
@@ -35,7 +39,7 @@ const domHelper=(function(){
         }
   
         }
-    return {getelementData,changeUiState}
+    return {getelementData,changeUiState,isElementEmpty};
 })();
 
 export default domHelper

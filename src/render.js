@@ -2,7 +2,7 @@
 import renderHelpers from "./render-helpers";
 const render=function(LibraryState){
   let taskDiv;
-    if(LibraryState.state==="create" || LibraryState.state==="delete" || LibraryState.state==="edit" || LibraryState.state==="ui")
+    if(LibraryState.state==="create-button" || LibraryState.state==="create" || LibraryState.state==="delete" || LibraryState.state==="edit" || LibraryState.state==="ui")
                  {renderHelpers.resetProjects();
                   displayCards();} 
    
@@ -25,7 +25,11 @@ const render=function(LibraryState){
 
                 taskDiv= renderHelpers.createCard(project,project.title,LibraryState.state,LibraryState.id);
             }
-    project.nestedArray.forEach((task)=>{
+            if(document.querySelector(".starred-layout.view-tasks"))
+            {
+                renderHelpers.makeCustomStarredModalDropDown(project.title,project.id);
+            }
+    renderHelpers.getReversedArray(project.nestedArray).forEach((task)=>{
         if(task.priority==="true" && document.querySelector(".starred-layout.view-tasks"))
     {
         let taskListHtml=renderHelpers.addTasks(task);
@@ -34,7 +38,7 @@ const render=function(LibraryState){
     }
     else if(!document.querySelector(".starred-layout.view-tasks") && project.view==="true"){   
         // console.log(document.querySelector(".starred-layout.view-tasks"));
-        let projectTaskListHtml=renderHelpers.addTasks(task,LibraryState.state,"")
+        let projectTaskListHtml=renderHelpers.addTasks(task,LibraryState.state,LibraryState.id)
     taskDiv.innerHTML+=projectTaskListHtml;}
  
 
