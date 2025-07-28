@@ -1,5 +1,6 @@
 //task 1 clean it
 import renderHelpers from "./render-helpers";
+import uiState from "./uiState";
 const render=function(LibraryState){
   let taskDiv;
     if(LibraryState.state==="create-button" || LibraryState.state==="create" || LibraryState.state==="delete" || LibraryState.state==="edit" || LibraryState.state==="ui")
@@ -17,6 +18,7 @@ const render=function(LibraryState){
      else{
         loopLibrary();
      }
+uiState.state="read";
     }
     function loopLibrary(){
   LibraryState.myLibrary.nestedArray.forEach((project)=>{

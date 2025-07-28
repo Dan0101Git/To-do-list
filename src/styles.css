@@ -354,7 +354,7 @@ background-size: cover;
     visibility: visible;
 }
 .kebab:hover,.kebab:has(.menu-show){
-    background-color: rgba(152, 152, 152, 0.185);
+    background-color: rgba(0, 0, 0, 0.099);
     border-radius: 50%;
 }
  #final-task-read{
@@ -362,6 +362,7 @@ background-size: cover;
 }
 #final-task-edit.on{
     display: flex;
+    background-color: #0000001c;
 }
 #final-task-read.on{
     display: flex;
@@ -461,7 +462,6 @@ width:100%;
     gap:.2rem;
  padding:0;
  display: flex;
- flex-direction: row;
  height:auto;
  align-items: flex-start;
 }
@@ -470,9 +470,10 @@ width:100%;
 }
 .edit-task-form .inputs{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: row;
     flex:1;
+    margin-left: 2rem;
 }
 .inputs button.date-shortcut{
     font-size: .7rem;
@@ -511,11 +512,9 @@ border-radius: 0;
 font-family: var(--main-font-family);
 }
 .tasks-lists input:hover{
-    border-bottom: 1px solid purple;
     color: black;
 }
 .edit-task-form textarea{
-      border-bottom: 2px solid purple;
       font-size: .8rem;
 }
 
@@ -606,6 +605,12 @@ div.task-buttons{
     display: flex;
     gap:.3rem;
     flex-direction: row;
+    margin-left: 2rem;
+    justify-content: flex-start;
+}
+#edit-details img{
+    width: 1.4rem;
+    height:1.4rem;
 }
 #edit-task-descrip{
     height:3rem;
@@ -614,7 +619,6 @@ div.task-buttons{
 }
 
 #edit-input-task:focus{
-border-bottom: 1px solid #8573a7;
 color:black;
 }
 
@@ -627,8 +631,8 @@ color:black;
 }
 .all-tasks{
     margin-bottom: .5rem;
-    background-color: rgba(49, 49, 49, 0.018);
-       box-shadow: 0 .3px  1px rgba(0, 0, 0, 0.204);
+    /* background-color: rgba(192, 16, 16, 0.1); */
+       box-shadow: 0 .3px  1px rgba(51, 51, 51, 0.204);
 }
 .all-tasks:hover,.starred-list{
     background-color: rgba(112, 86, 126, 0.125);
@@ -687,4 +691,9 @@ hr.x-line{
        background-color:rgba(0, 24, 0, 0.151) ;
            transition: all .19s ease-in-out;
 
+}
+input::placeholder,textarea::placeholder{
+    font-size: .8rem;
+    opacity: .5;
+    color:rgb(29, 29, 14);
 }

@@ -14,7 +14,6 @@ const crudFunctionality=(function(){
     
             if(parentArray[i].id===child.id)
                 parentArray.splice(i,1);
-            console.log(i);
           }
           console.log(`${child.type} ${child.title} has been removed`)
     }

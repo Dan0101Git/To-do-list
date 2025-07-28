@@ -20,22 +20,21 @@ console.log(e.target);
     // }console.log(e.target);
 
     if(handlerHelpers.isElementClicked(e,".kebab") || handlerHelpers.isblurMenuOpened(".menu-show")){
-       handlerHelpers.toggleMenuVisbility(".project-menu","menu-show")
+        handlerHelpers.toggleMenuVisbility(".project-menu","menu-show")
     }
 
    if ((handlerHelpers.isElementClicked(e,".all-tasks") && e.target.tagName!=="BUTTON" && e.target.tagName!=="IMG" && !e.target.matches(".toggle-completion") )||(handlerHelpers.isblurMenuOpened("#final-task-edit.on") && !e.target.closest(".clickable"))) {
-const editAreaTask = document.querySelector("#final-task-edit.on");
-const readAreaTask=e.target.closest("#final-task-read");
-console.log(readAreaTask);
- handlerHelpers.handletaskEditable(e,editAreaTask,readAreaTask);
-}
+        const editAreaTask = document.querySelector("#final-task-edit.on");
+        const readAreaTask=e.target.closest("#final-task-read");
+        handlerHelpers.handletaskEditable(e,editAreaTask,readAreaTask);
+    }
 if(e.target.className==="date-shortcut" && e.target.tagName==="IMG")
 {
-    const taskId=e.target.getAttribute("data-set");
-    const datePicker=document.querySelector(`li[data-set="${taskId}"] input[type="date"]`);
-    console.log(datePicker);
-    datePicker.showPicker();
-    datePicker.addEventListener("change",
+        const taskId=e.target.getAttribute("data-set");
+        const datePicker=document.querySelector(`li[data-set="${taskId}"] input[type="date"]`);
+        console.log(datePicker);
+        datePicker.showPicker();
+        datePicker.addEventListener("change",
         createProject);
        
 }
@@ -62,12 +61,12 @@ console.log(document.querySelector("#task-date").value);
 else
             domCalls.createElement([document.querySelector("#task-title").value,document.querySelector("#description").value,document.querySelector("#task-date").value,false,false],"task", domElements.createTaskDialog.getAttribute("data-set"));
         }
-        console.log(e.target);
         if(e.target.closest(".task-list-button")){
             console.log("hmm")
             domCalls.createElement(["","","","",false,false],"button", e.target.closest(".task-list-button").getAttribute("data-set"));
-               let titleInput=document.querySelector("#final-task-edit.on input[type='text']");
-titleInput.focus();
+            handlerHelpers.focusOnEditInput();
+            uiState.taskMode="write";
+
         }
         if(e.target.className==="delete")
         {
@@ -93,12 +92,11 @@ titleInput.focus();
             uiState.taskMode="read";
             }
 
-        if((e.key==="Enter" || e.target.getAttribute("type")==="date" || e.target.className==="date-shortcut") && e.target.closest("#final-task-edit")){
-            const normalListMode=e.target.closest("#final-task-edit").previousElementSibling;
+        if((e.key==="Enter" || e.target.getAttribute("type")==="date" || e.target.className==="date-shortcut") && e.target.closest("#final-task-edit") ){
+            const normalListMode=e.target.closest("#final-task-edit")?e.target.closest("#final-task-edit").previousElementSibling:null;
             let dateButtonClicked="";
             if(e.target.tagName==="BUTTON")
                 dateButtonClicked=e.target.getAttribute("value");
-            console.log(e.target.parentNode.parentNode.parentNode.previousElementSibling);//tick
             if(e.target.getAttribute("type")==="date")
                 e.currentTarget.removeEventListener("click",createProject);
             if(e.target.tagName==="INPUT" || e.target.tagName==="TEXTAREA" || e.target.tagName==="BUTTON")
