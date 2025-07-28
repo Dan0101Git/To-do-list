@@ -7,7 +7,7 @@ const eventListeningHelpers=(function(){
     let taskEditFlag=0;
     let elemntflag;
     function buttonCreateProject(e){
-console.log(e.target);
+console.log(e.target,e.target.isConnected );
         if(handlerHelpers.isElementClicked(e,".create-project"))
             handlerHelpers.openAddProjectModal();  
 
@@ -36,7 +36,6 @@ if(e.target.className==="date-shortcut" && e.target.tagName==="IMG")
         datePicker.showPicker();
         datePicker.addEventListener("change",
         createProject);
-       
 }
     
     }
@@ -62,11 +61,10 @@ else
             domCalls.createElement([document.querySelector("#task-title").value,document.querySelector("#description").value,document.querySelector("#task-date").value,false,false],"task", domElements.createTaskDialog.getAttribute("data-set"));
         }
         if(e.target.closest(".task-list-button")){
-            console.log("hmm")
             domCalls.createElement(["","","","",false,false],"button", e.target.closest(".task-list-button").getAttribute("data-set"));
             handlerHelpers.focusOnEditInput();
             uiState.taskMode="write";
-
+            console.log("hmm");
         }
         if(e.target.className==="delete")
         {
@@ -89,7 +87,6 @@ else
             const elementList=document.querySelector(`li[data-set="${taskId}"]`);
             elementList.setAttribute("completed",!(elementList.getAttribute("completed")==="true"));
                domCalls.editElement(domHelper.getelementData(taskId),"circle",taskId);
-            uiState.taskMode="read";
             }
 
         if((e.key==="Enter" || e.target.getAttribute("type")==="date" || e.target.className==="date-shortcut") && e.target.closest("#final-task-edit") ){
@@ -105,7 +102,6 @@ else
     const taskId=e.target.parentNode.getAttribute("data-set");
    domCalls.editElement([document.querySelector(".on input").value,document.querySelector(".on textarea").value,document.querySelector(".on input[type='date']").value ||dateButtonClicked || normalListMode.getAttribute("data-date"),normalListMode.getAttribute("data-starred"),false],"edit",taskId)
 }
-uiState.taskMode="read";
         }
 
     }

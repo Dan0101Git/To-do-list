@@ -18,7 +18,8 @@ const render=function(LibraryState){
      else{
         loopLibrary();
      }
-uiState.state="read";
+uiState.taskMode="read";
+console.log("ok danihs nayyar",uiState.taskMode);
     }
     function loopLibrary(){
   LibraryState.myLibrary.nestedArray.forEach((project)=>{
