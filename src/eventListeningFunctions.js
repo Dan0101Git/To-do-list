@@ -78,6 +78,7 @@ else
             const taskId=e.target.parentNode.getAttribute("data-set");
             const elementList=document.querySelector(`li[data-set="${taskId}"]`);
             elementList.setAttribute("data-starred",!(elementList.getAttribute("data-starred")==="true"));
+                         handlerHelpers.updateWriteTask(e);
             domCalls.editElement(domHelper.getelementData(taskId),"star",taskId);
             e.stopPropagation();
         }
@@ -86,6 +87,8 @@ else
             const taskId=e.target.parentNode.getAttribute("data-set");
             const elementList=document.querySelector(`li[data-set="${taskId}"]`);
             elementList.setAttribute("completed",!(elementList.getAttribute("completed")==="true"));
+          console.log(uiState.taskMode);
+             handlerHelpers.updateWriteTask(e);
                domCalls.editElement(domHelper.getelementData(taskId),"circle",taskId);
             }
 

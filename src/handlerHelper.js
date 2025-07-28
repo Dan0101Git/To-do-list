@@ -99,10 +99,10 @@ if(uiState.taskMode==="write"  && getDataSetAttribute(readAreaTask)!==handlerHel
 {
     uiState.tempAttribute=readAreaTask.getAttribute("data-set");
 if(isTaskNew(editAreaTask) && domHelper.isElementEmpty()){    console.log("hey");
-setTimeout(()=>{domCalls.deleteElement("",editAreaTask.getAttribute("data-set"));},10)
+setTimeout(()=>{domCalls.deleteElement("",editAreaTask.getAttribute("data-set"));},2)
 return;}       
 const dataArray=[document.querySelector(".on input").value,document.querySelector(".on textarea").value,editAreaTask.previousElementSibling.getAttribute("data-date"),editAreaTask.previousElementSibling.getAttribute("data-starred"),false];
-      setTimeout(()=>{ domCalls.editElement(dataArray,"edit",editAreaTask.getAttribute("data-set"))},10) ;
+      setTimeout(()=>{ domCalls.editElement(dataArray,"edit",editAreaTask.getAttribute("data-set"))},2) ;
 
 }
     }
