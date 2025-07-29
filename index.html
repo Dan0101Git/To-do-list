@@ -4,8 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do-List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 <script defer src="main.js"></script></head>
 <body>
-    
+    <div class="container">
+        <header>
+            <div class="logo"><img src="4b572705d14f6e07644b.svg" alt=""></div>
+<h1>Tasky</h1>
+    </header>
+    <main>
+                    <button class="menu-image"><img src="c93a6567df4535fa8c37.png"  alt=""></button>
+        <div class="navbar viewNav">
+
+            <button class="create-project"><span>+</span>CREATE</button>
+            <div class="projectList">
+                <ul class="categories"><li><img src="afc12a3ff62816945a55.svg"><button class="my-tasks view-tasks">My Tasks</button></li>
+               <li><img src="fc96d2930c94ab1d7333.svg"><button class="button starred-layout"> Starred</button></li> 
+                </ul>
+                <hr class="x-line">
+                <div class="all-projects">
+                    <div class="toggle-projects-view">
+                       <span>All Projects</span>
+                       <button><img src="112de354cd78a5dcd434.svg" alt=""></button> 
+                    </div>
+                    <ul class="project-filter"></ul>
+</div>
+
+            </div>
+
+
+
+
+
+
+
+
+            <dialog class="add-project">
+                <form class="project-form" action="">
+                    <div class="close-modal"><button type="button" ><img src="60c03677ab507ee90bd6.png" alt=""></button></div>
+                <div>
+                    <label for="project-title">Create New Project</label><input id="project-title" type="text" placeholder="title">
+                </div>
+                <div class="buttons">
+                    <button type="button" class="close-modal"type="button">CANCEL</button>
+                        <button type="submit" class="submit-project">ADD</button>
+
+                </div>
+            </form></dialog>
+                <dialog class="add-task">
+                <form class="task-form" action="">
+                                        <div type="button" class="close-modal"><button ><img src="60c03677ab507ee90bd6.png" alt=""></button></div>
+
+                <div>
+                    <label for="task-title">Add Task</label><input id="task-title" type="text" placeholder="title">
+                </div>
+
+                <div>
+                  <input id="task-date" type="date" >
+                </div><div>
+                  <textarea id="description" placeholder="Description"></textarea>
+ </div>
+           
+                <div class="buttons">
+                   
+                        <button type="submit" class="submit-project">SAVE</button>
+
+                </div>
+            </form></dialog>
+        </div>
+        <section class="article">
+            <div class="projects">
+
+            </div>
+        </section>
+  
+    </main>
+   
+    <footer>
+        <p>created by <a href="https://github.com/Dan0101Git">Danish</a></p>
+    </footer>
+    </div>
 </body>
 </html>
