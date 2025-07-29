@@ -53,22 +53,34 @@ const domCalls=(function(){
 
 
 
-const defaultProject=domCalls.createElement(["Default","","","","","true"],"project");
  const defaultProject2=domCalls.createElement(["Things To do","","","","","true"],"project");
-
-const delay = 200;
-const taskData = [["add close button to modal", "after clicking on certain area and clicking back on completed task, t gets editable", "Today", "true"],["toggle sidebar view", "y8", "Tomorrow", "true"],["transitions", "y8", "Sun, August 3", "false"],["start working on subtasks", "y8", "Sun, August 3", "false"],["add new task in starred view mode", "y8", "Sun, August 3", "false"],["add completed tasks to the end of list", "y8", "Tomorrow", "false"]];
+const defaultProject=domCalls.createElement(["Tasky Doables","","","","","true"],"project");
+const delay = 100;
+const taskData = [
+  ["Refactor component layout", "Simplify JSX and separate concerns", "Today", "true"],
+  ["Fix modal layering issue", "Ensure z-index respects hierarchy", "Today", "true", "true"],
+  ["Strength workout (legs)", "Focus on squats, lunges, calves", "Today", "true"],
+  ["Deep clean desk setup", "Declutter cables and align monitor", "Today", "false", "true"],
+  ["Resume backend roadmap", "Work through Node.js routing module", "Tomorrow", "true"],
+  ["Organize bookmarks", "Group by usage and relevance", "Tomorrow", "false"],
+  ["Sync Notion calendar", "Integrate personal + dev tasks", "Sun, August 3", "false"],
+  ["Review bike touring checklist", "Hydration, saddlebag, tubeless kit", "Sun, August 3", "false"],
+  ["Take progress photos", "Evaluate posture & bodyfat drop", "Sun, August 3", "false"],
+  ["Revisit 'Coding Interview Prep'", "Go through arrays and recursion", "Tomorrow", "true"],
+  ["Update project README", "Add usage notes and setup steps", "Today", "true"],
+  ["Stretch + unwind (20 min)", "Lower back and hip mobility", "Today", "false"]
+];
 const taskData2 = [
+    ["add close button to modal", "after clicking on certain area and clicking back on completed task, t gets editable", "Today", "true","true"],["toggle sidebar view", "y8", "Tomorrow", "true"],["transitions", "y8", "Sun, August 3", "false"],["start working on subtasks", "y8", "Sun, August 3", "false"],["add new task in starred view mode", "y8", "Sun, August 3", "false"],["add completed tasks to the end of list", "y8", "Tomorrow", "false","true"],
   ["Complete DanishTodo", "Finish the main logic and UI cleanup", "Today", "true"],
   ["45-min strength training", "Focus on upper body push movements", "Today", "true"],
   ["Plan meals for the week", "Keep protein high and carbs moderate", "Today", "false","true"],
   ["Resume Odin backend", "Start NodeJS Foundations", "Tomorrow", "true"],
   ["Call ISP", "Report connection drop issues", "Tomorrow", "false"],
   ["Sort bike touring gear", "Check lights, brake pads, and clean chain", "Sun, July 28", "false"]];
-createDefaultProject(6,defaultProject.id,taskData);
-createDefaultProject(6,defaultProject2.id,taskData2)
 
- const task1=domCalls.createElement(taskData[0], "task", defaultProject.id);
+createDefaultProject(12,defaultProject2.id,taskData2)
+createDefaultProject(7,defaultProject.id,taskData)
 function createDefaultProject(number,project,dataArray){for (let i = 1; i < number; i++) {
   setTimeout(() => {
     domCalls.createElement(dataArray[i], "task", project);

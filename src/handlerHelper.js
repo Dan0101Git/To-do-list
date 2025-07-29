@@ -20,9 +20,6 @@ const handlerHelpers=(function(){
             }
     function handletaskEditable(e,editAreaTask,readAreaTask){
 console.log(uiState.taskMode,isTaskEditbale(e.target.closest(".all-tasks")),e.target.tagName);
-// if(e.target.closest.tagName==="BUTTON"){
-//     if(uiState.taskMode==="write" && )
-// }
 
 if(uiState.taskMode==="write" && readAreaTask && editAreaTask && getDataSetAttribute(readAreaTask)!==handlerHelpers.getDataSetAttribute(editAreaTask) &&isTaskEditbale(e.target.closest(".all-tasks")))
 {
@@ -38,8 +35,8 @@ return;}
 
         domCalls.editElement([document.querySelector(".on input").value,document.querySelector(".on textarea").value,editAreaTask.previousElementSibling.getAttribute("data-date"),editAreaTask.previousElementSibling.getAttribute("data-starred"),false],"edit",editAreaTask.getAttribute("data-set"))
         readAreaTask=document.querySelector(`#final-task-read[data-set="${uiState.tempAttribute}"]`);
-        updateTaskMode("write",readAreaTask,readAreaTask.nextElementSibling);
-        focusOnEditInput();
+       setTimeout(()=>{ updateTaskMode("write",readAreaTask,readAreaTask.nextElementSibling);
+        focusOnEditInput();},50);
 
 }
 else if(uiState.taskMode==="read" && isTaskEditbale(e.target.closest(".all-tasks")))
@@ -95,10 +92,11 @@ return;
     function updateWriteTask(e){
         const editAreaTask = document.querySelector("#final-task-edit.on");
         const readAreaTask=e.target.closest("#final-task-read");
-if(uiState.taskMode==="write"  && getDataSetAttribute(readAreaTask)!==handlerHelpers.getDataSetAttribute(editAreaTask) &&isTaskEditbale(e.target.closest(".all-tasks")))
-{
+        console.log(readAreaTask,editAreaTask,checkPresence(readAreaTask,editAreaTask));
+if(uiState.taskMode==="write"  && checkPresence(readAreaTask,editAreaTask) && getDataSetAttribute(readAreaTask)!==handlerHelpers.getDataSetAttribute(editAreaTask))
+{console.log(readAreaTask);
     uiState.tempAttribute=readAreaTask.getAttribute("data-set");
-if(isTaskNew(editAreaTask) && domHelper.isElementEmpty()){    console.log("hey");
+if(isTaskNew(editAreaTask) && domHelper.isElementEmpty()){   
 setTimeout(()=>{domCalls.deleteElement("",editAreaTask.getAttribute("data-set"));},2)
 return;}       
 const dataArray=[document.querySelector(".on input").value,document.querySelector(".on textarea").value,editAreaTask.previousElementSibling.getAttribute("data-date"),editAreaTask.previousElementSibling.getAttribute("data-starred"),false];
@@ -106,6 +104,20 @@ const dataArray=[document.querySelector(".on input").value,document.querySelecto
 
 }
     }
-return {updateWriteTask,isClickedOutside,focusOnEditInput,getDataSetAttribute,isElementClicked,toggleMenuVisbility,openAddProjectModal,isblurMenuOpened,handletaskEditable,isTaskEditbale,updateTaskMode,isTaskNew}
+    function checkPresence(readAreaTask,editAreaTask){
+        return readAreaTask && editAreaTask;
+    }
+    function renderOpenedElement(){
+                const editAreaTask = document.querySelector("#final-task-edit.on");
+            if(isTaskNew(editAreaTask) && domHelper.isElementEmpty()){
+                domCalls.deleteElement("",editAreaTask.getAttribute("data-set"));
+console.log(uiState.taskMode);
+return;
+            }
+                const dataArray=[document.querySelector(".on input").value,document.querySelector(".on textarea").value,editAreaTask.previousElementSibling.getAttribute("data-date"),editAreaTask.previousElementSibling.getAttribute("data-starred"),false];
+      setTimeout(()=>{ domCalls.editElement(dataArray,"edit",editAreaTask.getAttribute("data-set"))},0) ;
+
+    }
+return {renderOpenedElement,updateWriteTask,isClickedOutside,focusOnEditInput,getDataSetAttribute,isElementClicked,toggleMenuVisbility,openAddProjectModal,isblurMenuOpened,handletaskEditable,isTaskEditbale,updateTaskMode,isTaskNew}
  })();
 export default handlerHelpers

@@ -27,8 +27,8 @@ const domHelper=(function(){
                       document.querySelector(".my-tasks").classList.remove("view-tasks")  ;  
             domCalls.uiState();
         }
-        if(document.querySelector(".toggle-project-view")){
-  if(e.target.parentNode.matches(".toggle-project-view"))
+
+  if(e.target.closest(".toggle-project-view"))
     { 
         const checkBoxDiv=e.target.closest(".project");
         const viewClass=e.target.closest(".toggle-project-view.true")?"false":"true";
@@ -36,8 +36,14 @@ const domHelper=(function(){
         domCalls.editElement([`${checkBoxDiv.getAttribute("data-title")}`,"","","","",viewClass],"viewProject",`${checkBoxDiv.getAttribute("data-set")}`)
 
     }
+        
+        if(e.target.closest(".menu-image")){
+            document.querySelector(".navbar").classList.toggle("viewNav");
         }
-  
+        if(e.target.closest(".close-modal")){
+            e.preventDefault();
+            e.target.closest("dialog").close();
+        }
         }
     return {getelementData,changeUiState,isElementEmpty};
 })();

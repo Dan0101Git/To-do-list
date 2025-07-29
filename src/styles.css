@@ -20,12 +20,12 @@ background-color: var(--body-bg);
 font-family: var(--main-font-family);
     width: 100vw;
     height: 100vh;
-   
+
 }
 .container{
     display: flex;
     flex-direction: column;
-    gap:1rem;
+    gap:2rem;
     height:100%;
   
     border-radius: var(--border-radius);
@@ -50,6 +50,7 @@ dialog{
     background-color:var(--body-bg);
     border:none;
     padding:1rem 0;
+      position: relative;
 }
 dialog::backdrop{
 background: rgba(0,0,0,0.6 );
@@ -73,6 +74,7 @@ form{
     align-items: center;
     align-content: center;
     padding: 0 2rem;
+  
 }
 form>div.buttons{
     align-self: flex-end;
@@ -84,6 +86,19 @@ form>div{
     justify-content: center;
     align-items: center;
     gap:.4rem;
+}
+form>div.close-modal{
+    position: absolute;
+    top:0;
+    right:1rem;
+    width:1rem;
+}
+div.close-modal button{
+    border:none;
+}
+div.close-modal img{
+width:1.5rem;
+height:1.5rem;
 }
 form>div.buttons{
     display: flex;
@@ -122,7 +137,7 @@ input:focus,input:hover,label:has(+input:hover),textarea:focus,textarea:hover{
     border-color:  rgb(0, 24, 0);
     outline:none;
     border-color: purple;
-    color:purple;
+    
 }
 
 header{
@@ -130,6 +145,11 @@ header{
 padding: 1rem 2rem;
     align-items: center;
     gap:1rem;
+}
+header .logo img{
+    width:2.5rem;
+    height:2.5rem;
+    display: inline-block;
 }
 footer{
     height:2rem;
@@ -148,6 +168,7 @@ footer a{
 }
 main{
     flex: 1;
+ transition: transform 0.3s ease;
 }
 main 
 button{
@@ -175,31 +196,61 @@ button{
 .create-project span{
     font-size: 1.8rem;
 }
-
+.article{
+    margin-left: 5rem;
+    transition: transform 0.3s ease;
+}
 main{
     display: flex;
-    gap:7rem;
 }
 main>.navbar{
     background-color: rgba(229, 229, 213, 0.279);
     padding:1rem 1.5rem;
-    position: relative;
     display: flex;
     flex-direction: column;
     gap:2rem;
     padding-top: 3rem;
 width:20rem;
+min-width: 20rem;
     border-radius: .7rem;
-}
-.navbar .menu-image{
+    /* display: none; */
+    opacity: 0;
     position: absolute;
-    left: .5rem;
-    top:0
+      transform: translateX(-100%);  /* Initially hidden off-screen */
+  transition: transform 0.3s ease;
+}
+
+.navbar.viewNav{
+    display: flex;
+    position: relative;
+    opacity: 1;
+      transform: translateX(0); /* Slide into view */
+}
+.navbar.viewNav + .article{
+  transform: translateX(100px);
+  margin-left:0;
+}
+ .menu-image{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    border: none;
+   left:.5rem;
+    top:6rem;
+    width: 2rem;
+    border-radius: .5rem;
+    z-index: 1;
+}
+.menu-image{
+    opacity: 1;
+}
+.menu-image:hover{
+background-color: #44444438;
 }
 .categories li:has(.view-tasks){
-    background-color: #a43be526;
+    background-color: rgba(128, 0, 128, 0.197);
     box-shadow: 0px 2px 6px rgba(62, 62, 62, 0.567);
-     transform: translate(0,0) scale(1.01);
+     transform: translate(0,0) scale(.95);
     transition: all .19s ease-in-out;
 }
 .navbar .projectList{
@@ -254,10 +305,25 @@ font-size: 1rem;
 .all-projects{
    flex: 1;
 }
+
 .all-projects .toggle-projects-view{
     display: flex;
     align-items: center;
     justify-content: space-between;
+   
+}
+.class-done{
+    display: flex;
+    justify-content: space-between;
+
+}
+#completed-pending{
+    font-size: .9rem;
+}
+button.toggle-project-view.true{
+     background-color:#00000020;
+     padding:0;
+     border-radius: 0;
 }
 .all-projects .toggle-projects-view span{
     font-weight: 700;
@@ -267,7 +333,7 @@ font-family: var(--heading-font-family);
 .project-filter{
     display: flex;
     flex-direction: column;
-    gap:.5rem;
+    gap:.9rem;
     justify-content: center;
 }
 .project-filter>div{
@@ -278,6 +344,10 @@ font-family: var(--heading-font-family);
         border-radius: .6rem;
         padding:.5rem;
         padding-right: 1rem;
+}
+.project-filter>div:has(.true){
+        box-shadow: .3px 0px 6px rgba(19, 19, 19, 0.503);
+
 }
 .project-filter>div:hover{
     background-color: #00000020;
@@ -301,10 +371,10 @@ section .projects{
 }
 section .project-card{
     min-height: 42vh;
-    min-width: 26rem;
+    min-width: 23rem;
     max-width: 45vw;
     padding:1.6rem .5rem;    border-radius: 1rem;
-    background-color: rgba(151, 151, 151, 0.139);
+    background-color: rgba(7, 7, 7, 0.042);
     display: flex;
     flex-direction: column;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3);
@@ -312,6 +382,7 @@ section .project-card{
     flex-shrink: 0;
      text-overflow: ellipsis;
     overflow: hidden;
+
 }
 .project-card.view-starred{
     width:60%;
@@ -357,22 +428,45 @@ background-size: cover;
     background-color: rgba(0, 0, 0, 0.099);
     border-radius: 50%;
 }
- #final-task-read{
-    display: none;
+#final-task-read,
+#final-task-edit {
+  overflow: hidden;
+transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in;
+
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
 }
-#final-task-edit.on{
-    display: flex;
-    background-color: #0000001c;
+
+/* When ON, show with animation */
+#final-task-read.on,
+#final-task-edit.on {
+           padding:.3rem .4rem;
+       padding-right: .2rem;
+           margin-bottom: .5rem;
+   max-height: 150px;  
+  opacity: 1;
+  pointer-events: auto;
+  display: block;     /* Optional fallback for flex layout */
 }
-#final-task-read.on{
-    display: flex;
+
+/* Set layout style if you dfwant flex */
+#final-task-edit.on {
+  display: flex;
+
+      background-color: rgba(145, 1, 1, 0);
 }
-#final-task-edit{
-    display: none;
+
+#final-task-read.on {
+  display: flex;
 }
-#final-task-read.on,button{
-cursor: pointer;
+
+/* Make sure cursor is correct */
+#final-task-read.on,
+button {
+  cursor: pointer;
 }
+
 .project-menu{
     position: absolute;
     top:1.8rem;
@@ -433,10 +527,14 @@ section .project-card:hover{
 }
 .task-list{
 width:100%;
+object-fit: cover;
+display: flex;
+flex-direction: column;
 }
-.task-list>*{
-       padding:.3rem .4rem;
-       padding-right: .2rem;
+.task-list:has(.panda)
+{gap:4rem;}
+.task-list>*>*{
+
 }
 .task-list-button{
     display: flex;
@@ -445,6 +543,8 @@ width:100%;
     justify-content: flex-start;
     margin-top: 1rem;
     margin-bottom: .3rem;
+        padding:.3rem .4rem;
+       padding-right: .2rem;
 }
 .task-list-button:hover{
        transform: translate(0,0) scale(1.02);
@@ -454,7 +554,7 @@ width:100%;
         list-style-type: none;
         display: flex;
         flex-direction: column;
-        gap:.1rem;
+        gap:.2rem;
         position: relative;
 }
 .edit-task-form{
@@ -477,13 +577,13 @@ width:100%;
 }
 .inputs button.date-shortcut{
     font-size: .7rem;
-    background :rgba(45, 45, 45, 0.112);
+    background :beige;
     padding:.4rem;
     border-radius: .5rem;
 }
 button.date-shortcut:hover{
 border-radius: .5rem;
-background-color:rgba(45, 45, 45, 0.094) ;
+background-color:rgba(12, 12, 12, 0.058) ;
 color:black;
 }
 .tasks-lists{
@@ -585,13 +685,11 @@ div.task-buttons{
 }
 .project-filter button{
     border: none;
-    padding:.2rem;
-    width:2.3rem;
-    height:2.3rem;
+
 }
 .project-filter button img{
-    width:calc(12px + 1rem);
-    height:calc(12px +1rem );
+    width:calc(12px + 1.2rem);
+    height:calc(12px + 1,2rem );
 }
 
 .task-buttons button img{
@@ -622,7 +720,7 @@ div.task-buttons{
 color:black;
 }
 
-.delete-task:hover,.edit-task-form button:hover,.star-task:hover,.expand-task:hover{
+.delete-task:hover,.star-task:hover,.expand-task:hover{
    background-color: rgba(152, 152, 152, 0.185);
     border-radius: 50%;
 }
@@ -630,12 +728,12 @@ color:black;
     display: none;
 }
 .all-tasks{
-    margin-bottom: .5rem;
+
     /* background-color: rgba(192, 16, 16, 0.1); */
-       box-shadow: 0 .3px  1px rgba(51, 51, 51, 0.204);
+       box-shadow: 0 1px  6px rgba(51, 51, 51, 0.097);
 }
 .all-tasks:hover,.starred-list{
-    background-color: rgba(112, 86, 126, 0.125);
+    background-color: #8d3b4620;
 }
 .all-tasks:hover .task-buttons button,.starred-list .task-buttons button{
     visibility: visible;
@@ -647,21 +745,23 @@ color:black;
 }
 #date-button{
     align-self: flex-start;
-    font-size: .85rem;
+    font-size: .8rem;
     padding: .35rem;
     border-radius: .6rem;
-    border: 1px solid transparent;
-    background-color: rgba(15, 15, 15, 0.075);
-    color:rgb(30, 121, 30)
+    border: .5px solid black;
+    background-color: #f5f5dc;
+    color:rgb(30, 121, 30);
+    font-weight: bolder;
+    
 }
 #date-button.no-date{
     display: none;
 }
 #date-button.urgent{
-color:rgb(96, 0, 0);
+color:#600000;
 }
 #date-button.mild-urgent{
-color:rgb(95, 0, 95);
+color: #2c2c2c;
 }
 input#hiddenDate{
     opacity: 0;
@@ -696,4 +796,10 @@ input::placeholder,textarea::placeholder{
     font-size: .8rem;
     opacity: .5;
     color:rgb(29, 29, 14);
+}
+.panda{
+    object-fit: cover;
+    width:10rem;
+    height:10rem;
+align-self: center;
 }

@@ -14,12 +14,13 @@
 <body>
     <div class="container">
         <header>
-            <div><img src="./images/icons/list-icon.png" alt=""></div>
-<h1>To-do's</h1>
+            <div class="logo"><img src="./images/icons/list-icon.svg" alt=""></div>
+<h1>Tasky</h1>
     </header>
     <main>
-        <div class="navbar">
-            <img src="images/icons/menu.png" class="menu-image" alt="">
+                    <button class="menu-image"><img src="images/icons/menu.png"  alt=""></button>
+        <div class="navbar viewNav">
+
             <button class="create-project"><span>+</span>CREATE</button>
             <div class="projectList">
                 <ul class="categories"><li><img src="./images/icons/my-tasks.svg"><button class="my-tasks view-tasks">My Tasks</button></li>
@@ -45,17 +46,20 @@
 
             <dialog class="add-project">
                 <form class="project-form" action="">
+                    <div class="close-modal"><button type="button" ><img src="./images/icons/close.png" alt=""></button></div>
                 <div>
                     <label for="project-title">Create New Project</label><input id="project-title" type="text" placeholder="title">
                 </div>
                 <div class="buttons">
-                    <button>CANCEL</button>
+                    <button type="button" class="close-modal"type="button">CANCEL</button>
                         <button type="submit" class="submit-project">ADD</button>
 
                 </div>
             </form></dialog>
                 <dialog class="add-task">
                 <form class="task-form" action="">
+                                        <div type="button" class="close-modal"><button ><img src="./images/icons/close.png" alt=""></button></div>
+
                 <div>
                     <label for="task-title">Add Task</label><input id="task-title" type="text" placeholder="title">
                 </div>

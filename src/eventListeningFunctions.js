@@ -11,16 +11,25 @@ console.log(e.target,e.target.isConnected );
         if(handlerHelpers.isElementClicked(e,".create-project"))
             handlerHelpers.openAddProjectModal();  
 
-   //
-    // if(e.target.className==="task-list-button")
-    // {
-    //     domElements.createTaskDialog.classList.add("enter-task");
-    //     domElements.createTaskDialog.setAttribute("data-set",`${e.target.getAttribute("data-set")}`);
-    //    domElements.createTaskDialog.showModal();
-    // }console.log(e.target);
+   
+    if(e.target.closest(".add-starred"))
+    {
+        domElements.createTaskDialog.classList.add("enter-task");
+        console.log(e.target);
+       domElements.createTaskDialog.showModal();
+    }
+    if(uiState.taskMode==="write" && e.target.closest(".completed-list"))
+    {
+        handlerHelpers.renderOpenedElement();
+    }
 
     if(handlerHelpers.isElementClicked(e,".kebab") || handlerHelpers.isblurMenuOpened(".menu-show")){
-        handlerHelpers.toggleMenuVisbility(".project-menu","menu-show")
+      if(document.querySelector(".menu-show"))
+        document.querySelector(".menu-show").classList.toggle("menu-show");
+        else{const projectDataset=e.target.getAttribute("data-set");
+       console.log(document.querySelector(`[data-set="${projectDataset}"] .project-menu`))
+        handlerHelpers.toggleMenuVisbility(`[data-set="${projectDataset}"] .project-menu`,"menu-show")}
+
     }
 
    if ((handlerHelpers.isElementClicked(e,".all-tasks") && e.target.tagName!=="BUTTON" && e.target.tagName!=="IMG" && !e.target.matches(".toggle-completion") )||(handlerHelpers.isblurMenuOpened("#final-task-edit.on") && !e.target.closest(".clickable"))) {
@@ -28,7 +37,7 @@ console.log(e.target,e.target.isConnected );
         const readAreaTask=e.target.closest("#final-task-read");
         handlerHelpers.handletaskEditable(e,editAreaTask,readAreaTask);
     }
-if(e.target.className==="date-shortcut" && e.target.tagName==="IMG")
+if(e.target.closest(".date-shortcut") && e.target.tagName==="IMG")
 {
         const taskId=e.target.getAttribute("data-set");
         const datePicker=document.querySelector(`li[data-set="${taskId}"] input[type="date"]`);
@@ -42,12 +51,12 @@ if(e.target.className==="date-shortcut" && e.target.tagName==="IMG")
 
     function createProject(e){
         e.preventDefault();
-        if(e.target.className==="project-form"){
+        if(e.target.closest(".project-form")){
                  
                 domElements.createProjectDialog.close();
       domCalls.createElement([domElements.projectInput.value,"","","","","true"],"project"); //index interaction 1
         }
-        if(e.target.className==="task-form"){
+        if(e.target.closest(".task-form")){
 console.log(document.querySelector("#task-date").value);
         domElements.createTaskDialog.close();
                     if(document.querySelector(".starred-layout.view-tasks")){
@@ -60,19 +69,19 @@ console.log(document.querySelector("#task-date").value);
 else
             domCalls.createElement([document.querySelector("#task-title").value,document.querySelector("#description").value,document.querySelector("#task-date").value,false,false],"task", domElements.createTaskDialog.getAttribute("data-set"));
         }
-        if(e.target.closest(".task-list-button")){
+        if(e.target.closest(".task-list-button.normal")){
             domCalls.createElement(["","","","",false,false],"button", e.target.closest(".task-list-button").getAttribute("data-set"));
             handlerHelpers.focusOnEditInput();
             uiState.taskMode="write";
             console.log("hmm");
         }
-        if(e.target.className==="delete")
+        if(e.target.closest(".delete"))
         {
 
             domCalls.deleteElement("",e.target.parentNode.getAttribute("data-set"));
             e.stopPropagation();
         }
-           if(e.target.className==="star")
+           if(e.target.closest(".star"))
         {
             console.log(e.target.parentNode);
             const taskId=e.target.parentNode.getAttribute("data-set");
@@ -82,17 +91,17 @@ else
             domCalls.editElement(domHelper.getelementData(taskId),"star",taskId);
             e.stopPropagation();
         }
-        if(e.target.className==="toggle-completion"){
+        if(e.target.closest(".toggle-completion")){
                         console.log(e.target.parentNode);
             const taskId=e.target.parentNode.getAttribute("data-set");
             const elementList=document.querySelector(`li[data-set="${taskId}"]`);
             elementList.setAttribute("completed",!(elementList.getAttribute("completed")==="true"));
           console.log(uiState.taskMode);
-             handlerHelpers.updateWriteTask(e);
+            handlerHelpers.updateWriteTask(e);
                domCalls.editElement(domHelper.getelementData(taskId),"circle",taskId);
             }
 
-        if((e.key==="Enter" || e.target.getAttribute("type")==="date" || e.target.className==="date-shortcut") && e.target.closest("#final-task-edit") ){
+        if((e.key==="Enter" || e.target.getAttribute("type")==="date" || e.target.closest(".date-shortcut")) && e.target.closest("#final-task-edit") ){
             const normalListMode=e.target.closest("#final-task-edit")?e.target.closest("#final-task-edit").previousElementSibling:null;
             let dateButtonClicked="";
             if(e.target.tagName==="BUTTON")
