@@ -130,14 +130,14 @@ function shootBlackFragments(event) {
 
   // Trigger the confetti animation with custom options
   confetti({
-    particleCount: 50,         // The number of fragments
-    spread: 45,                // How wide the burst is
-    startVelocity: 40,         // How fast the fragments shoot out
+    particleCount: 20,         // The number of fragments
+    spread: 15,                // How wide the burst is
+    startVelocity: 20,         // How fast the fragments shoot out
     origin: origin,            // Where the burst comes from (the checkbox)
     colors: ['#000000'],       // Only use black fragments
-    shapes: ['square'],        // Use square shapes
+    shapes: ['circle'],        // Use square shapes
     scalar: 0.6,               // Makes the fragments smaller
-    gravity: 1,
+    gravity: 1.4,
     drift: 0,
     ticks: 100                 // How long the animation lasts
   });
