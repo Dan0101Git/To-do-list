@@ -98,7 +98,7 @@ const renderHelpers = (function () {
 
   function addTasks(task, state, isLastTask) {
     // Function body omitted for brevity
-    return renderTask.addTasks();
+    return renderTask.addTasks(task, state, isLastTask);
   }
 
   function updateSidebarProjects(project, counter) {

@@ -1,3 +1,17 @@
+import domElements from "./domElements";
+import addTask from "./images/icons/addTask.png";
+import deleteBin from "./images/icons/delete.svg";
+import circleList from "./images/icons/circle.svg";
+import calanderImage from "./images/icons/calender.svg";
+import desciptionImage from "./images/icons/description.svg";
+import starUnfilled from "./images/icons/star-unfilled.svg";
+import arrowRight from "./images/icons/arrow-right.svg";
+import starFilled from "./images/icons/star-filled.svg";
+import tick from "./images/icons/tick.svg";
+import check from "./images/icons/check.svg";
+import checkBox from "./images/icons/checkBox.svg";
+import lazy from "./images/icons/lazy-panda.png";
+
 const renderTask=(function (){
         function addTasks(task,state,isLastTask){
         let taskListHtml;

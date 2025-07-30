@@ -2,7 +2,6 @@ import "./styles.css";
 import eventListeners from "./eventListeners";
 import { Library } from "./projectState";
 import data from "./data";
-import { mapElement } from "./data";
 import stateObject from "./projectState";
 import helper from "./helpers";
 
