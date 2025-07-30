@@ -55,6 +55,7 @@ const domCalls=(function(){
 
  const defaultProject2=domCalls.createElement(["Things To do","","","","","true"],"project");
 const defaultProject=domCalls.createElement(["Tasky Doables","","","","","true"],"project");
+const defaultBasic=domCalls.createElement(["Daily Log","","","","","true"],"project");
 const delay = 100;
 const taskData = [
   ["Refactor component layout", "Simplify JSX and separate concerns", "Today", "true"],
