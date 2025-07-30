@@ -539,7 +539,7 @@ flex-direction: column;
 gap:.1rem;
 }
 .task-list:has(.panda)
-{gap:4rem;}
+{gap:0rem;}
 .task-list>*>*{
 
 }
@@ -740,7 +740,7 @@ color:black;
        box-shadow: 0 1px  6px rgba(51, 51, 51, 0.097);
 }
 .all-tasks:hover,.starred-list{
-    background-color: #8d3b4620;
+    background-color: #c2400c1c;
 }
 .all-tasks:hover .task-buttons button,.starred-list .task-buttons button{
     visibility: visible;
@@ -809,4 +809,96 @@ input::placeholder,textarea::placeholder{
     width:10rem;
     height:10rem;
 align-self: center;
+}
+.panda-spam{max-width: 40ch;
+align-self: center;
+margin-bottom: 3rem;}
+.normal:has(+.panda){
+    margin-bottom: 4rem;
+}
+.trash-check{
+   visibility: hidden;
+    position: absolute;
+}
+.delete-alert{
+    position: fixed;
+    bottom: 1rem;
+    left:1rem;
+    border-radius: .8rem;
+padding:2rem;
+background-color: rgba(22, 22, 22, 0.842);
+font-size: 1.3rem;
+letter-spacing: .1rem;
+width:20rem;
+color:beige;
+}
+.delete-alert #undo{
+    margin-left: 1rem;
+    border: none;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.932);
+    font-size: 1.3rem;
+}
+.delete-alert #undo:hover{
+    color:rgb(221, 202, 238);
+}
+/* Start hidden */
+.delete-alert {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Show animation trigger */
+.delete-alert.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Exit animation */
+.delete-alert.hide {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+.panda {
+  /*
+    animation-name | duration | timing-function | fill-mode
+  */
+  animation: fadeInSlideUp 0.5s ease-out forwards;
+}
+.isTaskNew {
+  /*
+    animation-name | duration | timing-function
+  */
+  /* animation: highlightFlash 1.5s ease-out; */
+  animation: slideInFade 0.4s ease-out;
+}
+
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* Start 20px lower */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* End at its normal position */
+  }
+}
+@keyframes highlightFlash {
+  0% {
+    background-color: #e0f2f1af; /* A very soft, success green */
+  }
+  100% {
+    background-color: transparent; /* Or your card's default background color */
+  }
+}
+@keyframes slideInFade {
+  from {
+    opacity: 0;
+    transform: translateX(-20px); /* Start 20px to the left */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

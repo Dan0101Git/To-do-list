@@ -77,9 +77,36 @@ else
         }
         if(e.target.closest(".delete"))
         {
+            const listClicked=e.target.closest("#final-task-read");
+            console.log(listClicked)
+            listClicked.classList.add("trash-check");
+const alert = document.createElement("span");
+alert.className = "delete-alert";
+alert.innerHTML = `Task Deleted <button id="undo">UNDO</button>`;
+document.body.appendChild(alert);
 
-            domCalls.deleteElement("",e.target.parentNode.getAttribute("data-set"));
-            e.stopPropagation();
+// Animate in (trigger reflow first)
+requestAnimationFrame(() => {
+  alert.classList.add("show");
+});
+            document.querySelector("#undo").addEventListener("click",()=>{  listClicked.classList.remove("trash-check");                uiState.state="undo";
+                document.body.querySelector(".delete-alert").remove();
+            });
+            setTimeout(()=>{
+                if(uiState.state==="undo")
+                {
+                     return;
+                }
+                alert.classList.remove("show");
+  alert.classList.add("hide");
+                console.log(listClicked.getAttribute("data-set"));
+                 setTimeout(() => alert.remove(), 300);
+               domCalls.deleteElement("",listClicked.getAttribute("data-set"));
+   
+                                 
+            },4000);
+ e.stopPropagation(); 
+      
         }
            if(e.target.closest(".star"))
         {
@@ -98,6 +125,8 @@ else
             elementList.setAttribute("completed",!(elementList.getAttribute("completed")==="true"));
           console.log(uiState.taskMode);
             handlerHelpers.updateWriteTask(e);
+            if(!e.target.closest(".completed-list"))
+             handlerHelpers.shootBlackFragments(e)
                domCalls.editElement(domHelper.getelementData(taskId),"circle",taskId);
             }
 

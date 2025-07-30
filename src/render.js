@@ -20,16 +20,20 @@ const render=function(LibraryState){
         loopLibrary();
      }
 uiState.taskMode="read";
+
+//uiState.state="normal";
     }
     function loopLibrary(){
        
   LibraryState.myLibrary.nestedArray.forEach((project)=>{
+ 
        let tempCompletedList=[];
        let taskCounter=0;
            
             if(!document.querySelector(".starred-layout.view-tasks") && project.view==="true"){
 
                 taskDiv= renderHelpers.createCard(project,project.title,LibraryState.state,LibraryState.id);
+                console.log(taskDiv);
             }
             if(document.querySelector(".starred-layout.view-tasks"))
             {

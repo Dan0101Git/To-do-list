@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Dan0101Git/To-do-list#readme",
   "description": "",
   "devDependencies": {
+    "canvas-confetti": "^1.9.3",
     "css-loader": "^7.1.2",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.3",

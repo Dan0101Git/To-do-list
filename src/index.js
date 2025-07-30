@@ -55,7 +55,7 @@ const domCalls=(function(){
 
  const defaultProject2=domCalls.createElement(["Things To do","","","","","true"],"project");
 const defaultProject=domCalls.createElement(["Tasky Doables","","","","","true"],"project");
-const defaultBasic=domCalls.createElement(["Daily Log","","","","","true"],"project");
+setTimeout(()=>{const defaultBasic=domCalls.createElement(["Daily Log","","","","","true"],"project");},0)
 const delay = 100;
 const taskData = [
   ["Refactor component layout", "Simplify JSX and separate concerns", "Today", "true"],
@@ -72,7 +72,7 @@ const taskData = [
   ["Stretch + unwind (20 min)", "Lower back and hip mobility", "Today", "false"]
 ];
 const taskData2 = [
-    ["add close button to modal", "after clicking on certain area and clicking back on completed task, t gets editable", "Today", "true","true"],["toggle sidebar view", "y8", "Tomorrow", "true"],["transitions", "y8", "Sun, August 3", "false"],["start working on subtasks", "y8", "Sun, August 3", "false"],["add new task in starred view mode", "y8", "Sun, August 3", "false"],["add completed tasks to the end of list", "y8", "Tomorrow", "false","true"],
+    ["add close button to modal", "after clicking on certain area and clicking back on completed task, t gets editable", "Today", "true","true"],["add completed tasks to the end of list", "y8", "Tomorrow", "false","true"],
   ["Complete DanishTodo", "Finish the main logic and UI cleanup", "Today", "true"],
   ["45-min strength training", "Focus on upper body push movements", "Today", "true"],
   ["Plan meals for the week", "Keep protein high and carbs moderate", "Today", "false","true"],
@@ -80,12 +80,12 @@ const taskData2 = [
   ["Call ISP", "Report connection drop issues", "Tomorrow", "false"],
   ["Sort bike touring gear", "Check lights, brake pads, and clean chain", "Sun, July 28", "false"]];
 
-createDefaultProject(12,defaultProject2.id,taskData2)
+createDefaultProject(8,defaultProject2.id,taskData2)
 createDefaultProject(7,defaultProject.id,taskData)
 function createDefaultProject(number,project,dataArray){for (let i = 1; i < number; i++) {
   setTimeout(() => {
     domCalls.createElement(dataArray[i], "task", project);
-  }, i*delay);
+  }, 0);
 }}
 
 

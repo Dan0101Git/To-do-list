@@ -31,7 +31,7 @@ const renderHelpers=(function(){
         taskDiv.classList.add("task-list");
 
         const taskButton=document.createElement("button");
-        taskButton.textContent="Add a New Task";
+        taskButton.textContent="Add a Task";
         taskButton.classList.add("addTaskButton")
         card.classList.add("project-card");
         if(document.querySelector(".starred-layout.view-tasks"))
@@ -52,12 +52,16 @@ const renderHelpers=(function(){
 
 
        if(!document.querySelector(".starred-layout.view-tasks") ){
-            setTimeout(()=>{  if(projectEmpty(project.nestedArray)){
+             if(projectEmpty(project.nestedArray)){
             const projectImg=document.createElement("img");
+            const projectSpan=document.createElement("span");
+            projectSpan.classList.add("panda-spam");
+            projectSpan.innerHTML="<i>You’ve got a clean slate. Now’s your shot!</i>"
             projectImg.setAttribute("src",lazy);
             projectImg.classList.add("panda");
-             taskDiv.appendChild(projectImg);   
-            }},100);
+             taskDiv.appendChild(projectImg);  
+             taskDiv.appendChild(projectSpan);
+            }
        
                 if(project.nestedArray.length===0 && state==="create")
             card.classList.add("is-empty");
@@ -92,6 +96,7 @@ const renderHelpers=(function(){
         let listClass=task.priority==="true"?"starred-list":null;
         const circleImage=task.taskCompletion==="true"?tick:circleList;
         const completionClass=task.taskCompletion==="true"?"completed-list":null;
+        const newClass=state==="create"?"isTaskNew":null;
    
         if(state==="create" && isLastTask==="yes" && !document.querySelector(".starred-layout.view-tasks"))
             listClass+=" is-empty";  // taskCreation="is-empty"
@@ -118,7 +123,7 @@ const renderHelpers=(function(){
     data-date="${task.date}" 
     data-starred="${task.priority}" 
     completed="${task.taskCompletion}" 
-    class="all-tasks ${listClass} ${completionClass}" 
+    class="all-tasks ${listClass} ${completionClass} isNew" 
     id="final-task-read"
   >
     <div class="tasks-lists">
@@ -130,9 +135,7 @@ const renderHelpers=(function(){
         <span class="task-title">${task.title}</span>
       </div>
       <div class="task-buttons">
-        <button data-set="${task.id}" class="expand-task">
-          <img class="expand" src="${arrowRight}">
-        </button>
+     
         <button data-set="${task.id}" class="star-task">
           <img class="star" src="${starImage}">
         </button>
@@ -201,7 +204,7 @@ const renderHelpers=(function(){
 else
          taskListHtml= `
 <div class="task-container" data-set="${task.id}">
-  <li data-set="${task.id}" data-title="${task.title}" data-descrip="${task.description}" data-date="${task.date}" data-starred="${task.priority}" completed="${task.taskCompletion}" class="all-tasks on ${listClass} ${completionClass}" id="final-task-read">
+  <li data-set="${task.id}" data-title="${task.title}" data-descrip="${task.description}" data-date="${task.date}" data-starred="${task.priority}" completed="${task.taskCompletion}" class="all-tasks on ${listClass} ${completionClass} ${newClass}" id="final-task-read">
     <div class="tasks-lists">
       <div class="mark-list" data-set="${task.id}">
         <span class="strike-line"></span>
@@ -209,7 +212,6 @@ else
         <span class="task-title">${task.title}</span>
       </div>
       <div class="task-buttons">
-        <button data-set="${task.id}" class="expand-task"><img class="expand" src="${arrowRight}"></button>
         <button data-set="${task.id}" class="star-task"><img class="star" src="${starImage}"></button>
         <button data-set="${task.id}" class="delete-task"><img class="delete" src="${deleteBin}"></button>
       </div>
@@ -254,7 +256,7 @@ function updateSidebarProjects(project,counter){
     projectList.innerHTML+=`<div class="class-done"><div data-title="${project.title}" data-set="${project.id}" class="project ${project.title}">
     <button class="toggle-project-view ${checkedStatus}"><img src="${checkImage}"></button>
     <span class="project-title-checkbox">${project.title}</span>
-   </div> <span id="completed-pending">${counter} / ${project.nestedArray.length}</span>
+   </div> <span id="completed-pending">${project.nestedArray.length-counter}</span>
     </div>`;
 
 }
