@@ -98,10 +98,10 @@ if(uiState.taskMode==="write"  && checkPresence(readAreaTask,editAreaTask) && ge
 {console.log(readAreaTask);
     uiState.tempAttribute=readAreaTask.getAttribute("data-set");
 if(isTaskNew(editAreaTask) && domHelper.isElementEmpty()){   
-setTimeout(()=>{domCalls.deleteElement("",editAreaTask.getAttribute("data-set"));},2)
+setTimeout(()=>{domCalls.deleteElement("",editAreaTask.getAttribute("data-set"));},1002)
 return;}       
 const dataArray=[document.querySelector(".on input").value,document.querySelector(".on textarea").value,editAreaTask.previousElementSibling.getAttribute("data-date"),editAreaTask.previousElementSibling.getAttribute("data-starred"),false];
-      setTimeout(()=>{ domCalls.editElement(dataArray,"edit",editAreaTask.getAttribute("data-set"))},2) ;
+      setTimeout(()=>{ domCalls.editElement(dataArray,"edit",editAreaTask.getAttribute("data-set"))},1002) ;
 
 }
     }

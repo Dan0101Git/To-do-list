@@ -20,7 +20,12 @@ console.log(e.target,e.target.isConnected );
     }
     if(uiState.taskMode==="write" && e.target.closest(".completed-list"))
     {
-        handlerHelpers.renderOpenedElement();
+        if(e.target.closest(".toggle-completion")){        console.log("idk amn");
+               setTimeout(()=>{  handlerHelpers.renderOpenedElement();},1000);
+}
+        else
+          handlerHelpers.renderOpenedElement();
+      
     }
 
     if(handlerHelpers.isElementClicked(e,".kebab") || handlerHelpers.isblurMenuOpened(".menu-show")){
@@ -126,8 +131,10 @@ requestAnimationFrame(() => {
           console.log(uiState.taskMode);
             handlerHelpers.updateWriteTask(e);
             if(!e.target.closest(".completed-list"))
-             handlerHelpers.shootBlackFragments(e)
-               domCalls.editElement(domHelper.getelementData(taskId),"circle",taskId);
+             handlerHelpers.shootBlackFragments(e);
+            console.log(elementList);
+            setTimeout(()=>{               domCalls.editElement(domHelper.getelementData(taskId),"circle",taskId);
+},1000)
             }
 
         if((e.key==="Enter" || e.target.getAttribute("type")==="date" || e.target.closest(".date-shortcut")) && e.target.closest("#final-task-edit") ){

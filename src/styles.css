@@ -459,7 +459,7 @@ transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in;
 #final-task-edit.on {
   display: flex;
 
-      background-color: rgba(121, 120, 120, 0.139);
+      background-color: #c73d0716;
 }
 
 #final-task-read.on {
@@ -674,11 +674,11 @@ height:24px;
   right: -.2rem;
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 6s ease-in-out ;
+  transition: transform .3s ease-in-out ;
   pointer-events: none;
 }
 
-.completed-list .strike-line {
+[completed="true"] .strike-line {
   transform: scaleX(1);
 }
 
@@ -740,7 +740,7 @@ color:black;
        box-shadow: 0 1px  6px rgba(51, 51, 51, 0.097);
 }
 .all-tasks:hover,.starred-list{
-    background-color: #c2400c1c;
+    background-color: #c2400c31;
 }
 .all-tasks:hover .task-buttons button,.starred-list .task-buttons button{
     visibility: visible;
