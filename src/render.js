@@ -21,7 +21,7 @@ const render=function(LibraryState){
      }
 uiState.taskMode="read";
 
-//uiState.state="normal";
+uiState.state="normal";
     }
     function loopLibrary(){
        
@@ -33,7 +33,6 @@ uiState.taskMode="read";
             if(!document.querySelector(".starred-layout.view-tasks") && project.view==="true"){
 
                 taskDiv= renderHelpers.createCard(project,project.title,LibraryState.state,LibraryState.id);
-                console.log(taskDiv);
             }
             if(document.querySelector(".starred-layout.view-tasks"))
             {
@@ -47,7 +46,6 @@ uiState.taskMode="read";
       
     }
     else if(!document.querySelector(".starred-layout.view-tasks") && project.view==="true"){   
-        // console.log(document.querySelector(".starred-layout.view-tasks"));
         let projectTaskListHtml=renderHelpers.addTasks(task,LibraryState.state,LibraryState.id);
 if(projectTaskListHtml.completionClass!=="completed-list"){
     taskDiv.innerHTML+=projectTaskListHtml.taskListHtml;

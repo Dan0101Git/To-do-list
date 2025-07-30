@@ -8,13 +8,6 @@ const data = (data) => ({
   taskCompletion:data[4],
   view:data[5],
 });
-const mapElement=function(element,parentId){
-    if(element==="project")
-        return Library
-    if(element==="task") 
-    {
-                return helpers.detectItem(parentId).child;
-    }
-}
+
 export default data;
 export {mapElement};
