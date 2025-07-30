@@ -82,9 +82,21 @@ else
         }
         if(e.target.closest(".delete"))
         {
-            const listClicked=e.target.closest("#final-task-read");
-            console.log(listClicked)
-            listClicked.classList.add("trash-check");
+            let listClicked=e.target.closest("#final-task-read");
+            console.log(listClicked);
+            if(e.target.closest(".project-options")){
+            listClicked=e.target.closest(".project-options");
+                domCalls.deleteElement("",listClicked.getAttribute("data-set"));
+
+            }
+else{ listClicked.classList.add("trash-check");
+    listClicked.addEventListener('transitionend', function handler() {
+  // 3. Set display: none AFTER the animation
+  listClicked.classList.add("task-is-hidden");
+
+  // Important: Remove the listener so it doesn't fire again
+  listClicked.removeEventListener('transitionend', handler);
+});
 const alert = document.createElement("span");
 alert.className = "delete-alert";
 alert.innerHTML = `Task Deleted <button id="undo">UNDO</button>`;
@@ -109,7 +121,7 @@ requestAnimationFrame(() => {
                domCalls.deleteElement("",listClicked.getAttribute("data-set"));
    
                                  
-            },4000);
+            },2500);}           
  e.stopPropagation(); 
       
         }
