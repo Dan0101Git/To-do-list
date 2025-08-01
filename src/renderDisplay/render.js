@@ -1,7 +1,6 @@
 //task 1 clean it
 import renderHelpers from "./render-helpers";
-import uiState from "./uiState";
-import getData from "./storage/getData";
+import uiState from "../dom/uiState";
 const render=function(LibraryState){
   let taskDiv;
 //console.log(getData.returnUpdatedData());

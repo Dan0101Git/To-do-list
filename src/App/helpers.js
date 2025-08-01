@@ -1,8 +1,8 @@
 import stateObject from "./projectState";
 import { Library } from "./projectState";
-import render from "./render";
-import setData from "./storage/setData";
-import getData from "./storage/getData";
+import render from "../renderDisplay/render.js";
+import setData from "../storage/setData";
+import getData from "../storage/getData";
 export default (function helper(){
     function detectItem(itemId){
       //  const Library=getData.returnUpdatedData().myLibrary;

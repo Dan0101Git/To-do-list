@@ -1,6 +1,7 @@
 import domElements from "./domElements";
 import domHelper from "./domhelper";
 import eventListeningHelpers from "./eventListeningFunctions";
+import confetti from "canvas-confetti";
 
 export default(function eventListeners(){
     document.addEventListener("DOMContentLoaded",()=>{setTimeout(()=>{       document.body.addEventListener("click",eventListeningHelpers.buttonCreateProject);

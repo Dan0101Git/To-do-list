@@ -1,6 +1,6 @@
-import { domCalls } from ".";
-import check from "./images/icons/check.svg";
-import checkBoxImage from "./images/icons/checkBox.svg";
+import { domCalls } from "..";
+import check from "../images/icons/check.svg";
+import checkBoxImage from "../images/icons/checkBox.svg";
 
 const domHelper=(function(){
    function getelementData(elementId){

@@ -1,12 +1,12 @@
 import "./styles.css";
-import eventListeners from "./eventListeners";
-import { Library } from "./projectState";
-import data from "./data";
-import stateObject from "./projectState";
-import helper from "./helpers";
+import eventListeners from "./dom/eventListeners";
+import { Library } from "./App/projectState";
+import data from "./App/data";
+import stateObject from "./App/projectState";
+import helper from "./App/helpers";
 import getData from "./storage/getData";
 import setData from "./storage/setData";
-import reHydrate from "./rehydrate";
+import reHydrate from "./App/rehydrate";
 
 
 const domCalls=(function(){

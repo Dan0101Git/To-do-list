@@ -1,7 +1,7 @@
 import uiState from "./uiState";
 import domElements from "./domElements";
 import domHelper from "./domhelper";
-import { domCalls } from ".";
+import { domCalls } from "..";
 import confetti from "canvas-confetti";
 
 const handlerHelpers = (function () {

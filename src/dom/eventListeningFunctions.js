@@ -1,5 +1,5 @@
 import domElements from "./domElements";
-import { domCalls } from "./index";
+import { domCalls } from "../index";
 import domHelper from "./domhelper";
 import handlerHelpers from "./handlerHelper";
 import uiState from "./uiState";
