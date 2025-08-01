@@ -20,8 +20,10 @@ const Library=(function(){
     return {addChild,getlibrary,deleteChild,updateChild,nestedArray};
 })();
 const stateObject={
-myLibrary:Library.getlibrary(),
-state:"create",//create/edit/delete
+myLibrary:Library,
+state:"create",//create/create-button/edit/delete
+appState:null,
+
 }
 export {Library};
 export default stateObject

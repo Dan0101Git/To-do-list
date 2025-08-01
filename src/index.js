@@ -4,21 +4,26 @@ import { Library } from "./projectState";
 import data from "./data";
 import stateObject from "./projectState";
 import helper from "./helpers";
-
-
+import getData from "./storage/getData";
+import setData from "./storage/setData";
+import reHydrate from "./rehydrate";
 
 
 const domCalls=(function(){
     function createElement(dataString,element,parentId){
-      
+            let dataSent=stateObject.appState==="re-load"?dataString:data(dataString);      
            if(element==="project"){
-            const projectElement=Library.addChild(data(dataString));
+           console.log(dataSent)
+            const projectElement=Library.addChild(dataSent);
+            console.log(projectElement.id);
              helper.updateState("create",projectElement.id);
              return projectElement;
            }
         else
        { let itemInfo=helper.detectItem(parentId);
-      const elementCreated=  itemInfo.child.addChild(data(dataString)); 
+        console.log(itemInfo);
+      const elementCreated=  itemInfo.child.addChild(dataSent); 
+      console.log(elementCreated);
          if(element==="button")
             helper.updateState("create-button",elementCreated.id)
         // console.log(stateObject.myLibrary.nestedArray);
@@ -48,11 +53,16 @@ const domCalls=(function(){
           }
     return {createElement,deleteElement,editElement,uiState};
 })();
+// localStorage.clear();
+//helper.updateState("create");
+if(getData.returnUpdatedData()){
+  stateObject.appState="re-load";
+  reHydrate.rehydrateLocalState(getData.returnUpdatedData());
+}
+else
 
-
-
-
- const defaultProject2=domCalls.createElement(["Things To do","","","","","true"],"project");
+{
+   const defaultProject2=domCalls.createElement(["Things To do","","","","","true"],"project");
 const defaultProject=domCalls.createElement(["Tasky Doables","","","","","true"],"project");
 setTimeout(()=>{const defaultBasic=domCalls.createElement(["Daily Log","","","","","true"],"project");},0)
 const delay = 100;
@@ -87,5 +97,7 @@ function createDefaultProject(number,project,dataArray){for (let i = 1; i < numb
   }, 0);
 }}
 
+
+}
 
 export {domCalls};

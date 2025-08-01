@@ -1,9 +1,10 @@
 //task 1 clean it
 import renderHelpers from "./render-helpers";
 import uiState from "./uiState";
+import getData from "./storage/getData";
 const render=function(LibraryState){
   let taskDiv;
-
+//console.log(getData.returnUpdatedData());
     if(LibraryState.state==="create-button" || LibraryState.state==="create" || LibraryState.state==="delete" || LibraryState.state==="edit" || LibraryState.state==="ui")
                  {renderHelpers.resetProjects();
                   displayCards();} 

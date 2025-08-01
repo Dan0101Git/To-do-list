@@ -10,6 +10,12 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
+  resolve: {
+  fallback: {
+    util: require.resolve("util/")
+  }
+},
+
   devtool:"eval-source-map",
   devServer:{
     watchFiles:["./src/index.html"],

@@ -1,5 +1,6 @@
 import crudFunctionality from "./commonUtility";
 import helpers from "./helpers";
+import stateObject from "./projectState";
 class Task{
     constructor(data){
         this.title=data.title;
@@ -9,7 +10,8 @@ class Task{
      
         this.priority=data.priority;
         this.taskCompletion=data.taskCompletion;
-        this.id=crypto.randomUUID();
+            let elementId=stateObject.appState==="re-load"?data.id:crypto.randomUUID();
+     this.id=elementId;
         this.nestedArray=[];
         this.type="task"
     }

@@ -1,18 +1,37 @@
 import stateObject from "./projectState";
 import { Library } from "./projectState";
 import render from "./render";
+import setData from "./storage/setData";
+import getData from "./storage/getData";
 export default (function helper(){
     function detectItem(itemId){
+      //  const Library=getData.returnUpdatedData().myLibrary;
+     //   console.log(Library,itemId);
+     console.log(itemId,Library)
         return findItem(itemId,Library);//returns the o bject/project/task subtask clicked upon
     }
     function updateState(state,elementId){
-        stateObject.state=state;
+  //      console.log(getData.returnUpdatedData(),stateObject);
+
+if(stateObject.appState!=="re-load"){
+            stateObject.state=state;
         stateObject.id=elementId;
-        render(stateObject);
+        setData.setLibraryData(stateObject);
+}
+
+        
+   
+        render(getData.returnUpdatedData());
     }
+
+
+
 function getDate(date) {
   const myDate = new Date(date);
   const today = new Date();
+  console.log(myDate);
+  if(date===undefined)
+    return myDate;
     if(date.charCodeAt(0) >= 65 && date.charCodeAt(0) <= 90)
         return date;
   // Remove time from both dates
