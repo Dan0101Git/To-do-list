@@ -53,7 +53,7 @@ const domCalls=(function(){
           }
     return {createElement,deleteElement,editElement,uiState};
 })();
-// localStorage.clear();
+ //localStorage.clear();
 //helper.updateState("create");
 if(getData.returnUpdatedData()){
   stateObject.appState="re-load";

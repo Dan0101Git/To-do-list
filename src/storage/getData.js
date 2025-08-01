@@ -1,7 +1,11 @@
 import { Library } from "../projectState";
 
 const getData=(function(){
-  function returnUpdatedData(){    return JSON.parse(localStorage.getItem("library"));
+  function returnUpdatedData(){   
+    if(localStorage.getItem("library"))
+        return JSON.parse(localStorage.getItem("library"));
+    else
+        return "unable to fetch data";
 }
 return {returnUpdatedData};
 })();
